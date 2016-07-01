@@ -17,7 +17,6 @@ global_settings {
                     <I * winWidth - offsetX, 0, 0>,
                     <(I + 1) * winWidth - offsetX, winHeight, 2 * borderRadius>,
                     borderRadius, 0)
-                pigment { Blue }
             }
         #end
     }
@@ -42,12 +41,16 @@ plane {
     }
 }
 
-object {
-    Window(0.6, 0.5, 0.02, 4)
-    //rotate y * 45
-    translate y * 0.5
-}
+union {
+    object {
+        Window(0.6, 0.5, 0.02, 4)
+        translate y * 0.5
+    }
 
-object {
-    Window(0.5, 0.5, 0.02, 4)
+    object {
+        Window(0.5, 0.5, 0.02, 4)
+    }
+
+    pigment { Gray }
+    rotate y * 10
 }
