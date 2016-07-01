@@ -3,6 +3,7 @@
 
 global_settings {
     assumed_gamma 1
+    charset utf8
 }
 
 // ----------------------------------------
@@ -76,8 +77,8 @@ global_settings {
 	}
 
 	text {
-		ttf "arial.ttf" "lorem ipsum dolor sit amet" 0.1, 0
-		translate <-5.8, 0.7, -0.01>
+		ttf "arial.ttf" "(Normas Técnicas)" 0.1, 0
+		translate <-4, 0.7, -0.01>
 		scale 0.04
 	}
 }
