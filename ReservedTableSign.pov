@@ -1,3 +1,5 @@
+#version 3.7;
+
 #include "colors.inc"
 #include "shapes.inc"
 
@@ -47,13 +49,14 @@ global_settings {
 
 	// Header
 	polygon {
-		6,
+		7,
 		<contentLowerX - 0.005, headerLowerY, -0.002>,
 		<contentLowerX - 0.005, headerMediumY, -0.002>,
 		<contentLowerX + signWidth/5, headerMediumY, -0.002>,
 		<contentLowerX + signWidth/5 + 0.05, headerUpperY, -0.002>,
 		<contentUpperX, headerUpperY, -0.002>,
-		<contentUpperX, headerLowerY, -0.002>
+		<contentUpperX, headerLowerY, -0.002>,
+		<contentLowerX - 0.005, headerLowerY, -0.002>
 		pigment { Blue }
 	}
 

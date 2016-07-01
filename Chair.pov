@@ -19,6 +19,8 @@
 // Your fair use and other rights are in no way affected by the above. 
 // ==========================================  
 
+#version 3.7;
+
 #include "colors.inc"
 #include "shapes.inc"
 
@@ -211,7 +213,7 @@ background { White * 0.5 }
 
 light_source {
     x*100 color White
-    area_light 15*x,15*z, 10,10 jitter adaptive 1 orient
+    area_light 15*x,15*z, 10,10 jitter adaptive 1
     rotate z*45
     rotate y*150
 }
