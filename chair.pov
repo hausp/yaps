@@ -29,27 +29,27 @@ global_settings {
 // ----------------------------------------
 // Chair
 // ----------------------------------------
-#declare rCh=0.025/2;
-#declare rCh2=rCh+0.002;
-#declare rCh3=0.01;
-#declare rCh4=0.05;
-#declare yCh=0.43;
-#declare yCh2=0.345;
-#declare zCh=0.28;
-#declare xCh=0.33;
-#declare zCh3=0.07;
-#declare yCh1=yCh-rCh4; 
-#declare yCh5=yCh-rCh*2; 
-#declare yCh3=sqrt(zCh3*zCh3+yCh5*yCh5);
-#declare yCh4=yCh3-rCh4;
-#declare aCh=degrees(atan2(zCh3,yCh1));
-#declare aCh1=2;
-#declare aCh2=5;
-#declare aCh3=10;
-#declare C_Chair=rgb <1, 0, 0>;
-#declare C_PChair1=rgb <0.24219, 0.5, 0.45313>*0.5;
-#declare C_PChair2=rgb <0.5, 0.25781, 0.13672>*0.1;
-#declare P_Chair1=pigment {
+#declare rCh = 0.025/2;
+#declare rCh2 = rCh+0.002;
+#declare rCh3 = 0.01;
+#declare rCh4 = 0.05;
+#declare yCh = 0.43;
+#declare yCh2 = 0.345;
+#declare zCh = 0.28;
+#declare xCh = 0.33;
+#declare zCh3 = 0.07;
+#declare yCh1 = yCh-rCh4; 
+#declare yCh5 = yCh-rCh*2; 
+#declare yCh3 = sqrt(zCh3*zCh3+yCh5*yCh5);
+#declare yCh4 = yCh3-rCh4;
+#declare aCh = degrees(atan2(zCh3,yCh1));
+#declare aCh1 = 2;
+#declare aCh2 = 5;
+#declare aCh3 = 10;
+#declare C_Chair = rgb <1, 0, 0>;
+#declare C_PChair1 = rgb <0.24219, 0.5, 0.45313>*0.5;
+#declare C_PChair2 = rgb <0.5, 0.25781, 0.13672>*0.1;
+#declare P_Chair1 = pigment {
     wood
     turbulence 0.2
     lambda 3
@@ -59,7 +59,7 @@ global_settings {
     }
     rotate y*100 rotate x*20    scale 0.04 scale 0.01*<10,1,1>    
 }                             
-#declare P_Chair2=pigment {
+#declare P_Chair2 = pigment {
     wood
     turbulence 0.2
     lambda 3
@@ -69,7 +69,7 @@ global_settings {
     }
     rotate y*100 rotate z*80 scale 0.01 scale 0.8*<1,5,1>  
 }    
-#declare T_WoodChair=texture {
+#declare T_WoodChair = texture {
     pigment {
         pigment_pattern {
             agate agate_turb 0.3 lambda 3 
@@ -85,7 +85,7 @@ global_settings {
     finish {ambient 0 diffuse 1}
 }
 
-#declare T_LegChair=texture {
+#declare T_LegChair = texture {
     pigment {
         granite
         color_map {
@@ -99,7 +99,7 @@ global_settings {
     scale 0.1
 }
 
-#declare LegChairFront=union {
+#declare LegChairFront = union {
     cylinder {0,y*0.008,rCh2} // rubber
     torus {rCh,rCh2-rCh translate y*0.008}
     cylinder {0,y*yCh1,rCh} // montant Front
@@ -122,25 +122,25 @@ global_settings {
         translate <0,yCh,rCh4+zCh>
     }
 }
-#declare LegChairRear=union {
+#declare LegChairRear = union {
     cylinder {0,y*0.008,rCh2} 
     torus {rCh,rCh2-rCh translate y*0.008}
     cylinder {0,y*yCh4,rCh} 
     difference {torus {rCh4,rCh rotate x*90} plane {y,0} plane {x,0} translate <-rCh4,yCh4,0>}
 }              
 
-#declare rChD1=xCh/2-sin(radians(aCh1))*(zCh+2*rCh4)+sin(radians(aCh2))*rCh4;
-#declare rChD2=xCh/2-sin(radians(aCh1))*(zCh+2*rCh4)+sin(radians(aCh2))*(rCh4+yCh2);
-#declare yChD=yCh2*cos(radians(aCh2));
-#declare BackChair=difference {
+#declare rChD1 = xCh/2-sin(radians(aCh1))*(zCh+2*rCh4)+sin(radians(aCh2))*rCh4;
+#declare rChD2 = xCh/2-sin(radians(aCh1))*(zCh+2*rCh4)+sin(radians(aCh2))*(rCh4+yCh2);
+#declare yChD = yCh2*cos(radians(aCh2));
+#declare BackChair = difference {
     cone {0,rChD1,y*yChD,rChD2}
     cone {-y*0.001,rChD1*0.85,y*(yChD+0.001),rChD2*0.85}
     plane {z,0}
     plane {y,yCh2*0.5}
     scale <1,1,0.08/rChD2>
 }       
-#declare eChS=0.008;
-#declare SeatChair=union {
+#declare eChS = 0.008;
+#declare SeatChair = union {
     box {<-xCh/2,-eChS,0>,<xCh/2,0,zCh>}
     difference {cylinder {0,-eChS*y,xCh/2} plane {z,0} scale <1,1,0.05*2/xCh> translate z*zCh}
     difference {
@@ -153,7 +153,7 @@ global_settings {
     texture {pigment {P_Chair1} finish {ambient 0 diffuse 1}}
 } 
 
-#declare Chair=union {
+#declare Chair = union {
     union {
         object {LegChairFront rotate -y*aCh1 translate x*xCh/2}
         object {LegChairFront rotate -y*aCh1 translate x*xCh/2 scale <-1,1,1>}
@@ -195,9 +195,7 @@ global_settings {
             <-0.15, 0.40, 0>,
             <0.15, 0.45, 0.38>,
             0.02, 0)
-        texture {
-            pigment { Red }
-        }
+        pigment { Red }
     }
 }
 

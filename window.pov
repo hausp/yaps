@@ -8,25 +8,20 @@ global_settings {
 // ----------------------------------------
 // Window
 // ----------------------------------------
-// Adjustable Settings
-#declare winHeight = 1;
-#declare winWidth = 0.5;
-#declare borderRadius = 0.02;
-#declare numWindows = 3;
-
-#declare offsetX = numWindows * winWidth / 2;
-#declare Window = union {
-    #for (I, 0, numWindows - 1)
-        object {
-            Wire_Box(
-                <I * winWidth - offsetX, 0, 0>,
-                <(I + 1) * winWidth - offsetX, winHeight, 2 * borderRadius>,
-                borderRadius, 0)
-            pigment { Blue }
-        }
-    #end
-}
-
+#macro Window(winHeight, winWidth, borderRadius, numWindows)
+    #local offsetX = numWindows * winWidth / 2;
+    union {
+        #for (I, 0, numWindows - 1)
+            object {
+                Wire_Box(
+                    <I * winWidth - offsetX, 0, 0>,
+                    <(I + 1) * winWidth - offsetX, winHeight, 2 * borderRadius>,
+                    borderRadius, 0)
+                pigment { Blue }
+            }
+        #end
+    }
+#end
 
 // ----------------------------------------
 // Scene
@@ -48,6 +43,11 @@ plane {
 }
 
 object {
-    Window
+    Window(0.6, 0.5, 0.02, 4)
     //rotate y * 45
+    translate y * 0.5
+}
+
+object {
+    Window(0.5, 0.5, 0.02, 4)
 }
