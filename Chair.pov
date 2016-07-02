@@ -24,9 +24,12 @@
 #include "colors.inc"
 #include "shapes.inc"
 
-global_settings {
-    assumed_gamma 1
-} 
+#local debugMode = 0;
+#if (debugMode)
+    global_settings {
+        assumed_gamma 1
+    }
+#end
       
 // ----------------------------------------
 // Chair
@@ -204,32 +207,35 @@ global_settings {
 // ----------------------------------------
 // Scene
 // ----------------------------------------
-camera {
-  location <0, 1, -1.5>
-  look_at <0, 0, 1>
-}
 
-background { White * 0.5 }
-
-light_source {
-    x*100 color White
-    area_light 15*x,15*z, 10,10 jitter adaptive 1
-    rotate z*45
-    rotate y*150
-}
-
-plane {
-    y, -1
-    texture {
-        pigment { checker rgb<0.3, 0.3, 0.3> White }
-        /*finish {
-            ambient 0
-            diffuse 1
-        }*/
+#if (debugMode)
+    camera {
+      location <0, 1, -1.5>
+      look_at <0, 0, 1>
     }
-}
 
-object {
-    Chair
-    rotate y * 45
-}
+    background { White * 0.5 }
+
+    light_source {
+        x*100 color White
+        area_light 15*x,15*z, 10,10 jitter adaptive 1
+        rotate z*45
+        rotate y*150
+    }
+
+    plane {
+        y, -1
+        texture {
+            pigment { checker rgb<0.3, 0.3, 0.3> White }
+            /*finish {
+                ambient 0
+                diffuse 1
+            }*/
+        }
+    }
+
+    object {
+        Chair
+        rotate y * 45
+    }
+#end
