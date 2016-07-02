@@ -19,6 +19,7 @@ global_settings {
 #local winWidth = 2.5;
 #local winBorderRadius = 0.1;
 #local numWindows = 12;
+#local chairScaling = 1.5;
 #local offsetZ = -100;
 
 camera {
@@ -77,9 +78,30 @@ plane {
     }
 }
 
+// Chairs
 object {
     Chair
-    scale 1.5
+    scale chairScaling
     rotate y * -120
     translate <-3.5, -1, 5 + offsetZ>
+}
+
+object {
+    Chair
+    scale chairScaling
+    rotate y * 150
+    translate <-2.5, -1, 5 + offsetZ>
+}
+
+object {
+    Chair
+    scale chairScaling
+    rotate y * -30
+    translate <-3.2, -1, 6 + offsetZ>
+}
+
+object {
+    Sign
+    rotate y * -15
+    translate <-3, 0.2, 5 + offsetZ>
 }
