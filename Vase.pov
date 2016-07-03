@@ -1,9 +1,7 @@
 #version 3.7;
 
 #include "colors.inc"
-#include "shapes.inc"
 #include "textures.inc"
-#include "finish.inc"
 
 #local debugMode = 1;
 #if (debugMode)
