@@ -140,7 +140,7 @@ object {
 
 // Tables
 object {
-    RoundTable(0.8, 0.6, 0.02)
+    RoundTable(0.8, 0.6, 0.05)
     pigment { White }
     rotate y * 10
     scale 1.2
