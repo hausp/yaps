@@ -15,33 +15,29 @@
 // FatVase
 // ----------------------------------------
 
-#macro FatVase(height, radio, bendOffset, thick, emptyness)
-    #local yt = height / 2;
-    #local yb = -yt + bendOffset;
-    #local innerRadio = radio - thick;
+#macro FatVase(vHeight, bRadio, sRadio, vThickness, vEmptyness)
+    #local yTop = vHeight/2;
+    #local tsRadio = 0.07 * bRadio;
     merge {
         difference {
-            merge {
-                cylinder {
-                    <0, yt, 0>, <0, yb, 0>, radio
-                }
-                difference {
-                    sphere { <0, yb, 0>, radio }
-                    box { <-radio, -height, -radio>, <radio, -yt, radio> }
-                }
+            torus {
+                bRadio, tsRadio
+                translate yTop * y
             }
-            cylinder {
-                <0, height, 0>,
-                <0, -yt, 0>,
-                innerRadio
+            box {
+                <-(bRadio + tsRadio), yTop + 0.2*tsRadio, -(bRadio + tsRadio)>
+                <bRadio + tsRadio, yTop + 0.2*tsRadio + 1, bRadio + tsRadio>
             }
         }
-        cylinder {
-            <0, yt - emptyness, 0>, <0, yb, 0>, innerRadio
-            texture {
-                pigment { VeryDarkBrown }
-            }
+        torus {
+            sRadio, bRadio/2
+            translate (yTop * 0.7)/2 * y
         }
+        cone {
+            <0, yTop/16, 0>, bRadio*1.065
+            <0, -yTop, 0>, sRadio
+        }
+        //threshold .65
     }
 #end
 
@@ -67,12 +63,13 @@
     }
 
     object {
-        FatVase(0.6, 0.5, 0.2, 0.05, 0.1)
+        FatVase(0.6, 0.5, 0.3, 0.05, 0.1)
         texture {
             //Brown_Agate scale 0.1
             pigment { DarkBrown }
             normal { bumps 0.4 scale 0.05 }
             finish { phong 1 }
         }
+        rotate 30*x
     }
 #end
