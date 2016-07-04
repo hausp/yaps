@@ -26,8 +26,8 @@
             <0.0000, 0.0000>
             <sRadio+0.0*dx, 0.0000>
             <sRadio+0.5*dx, 0.3*dy>
-            <sRadio+1.0*dx, 0.5*dy>
-            <sRadio+2.0*dx, 1.0*dy>
+            <sRadio+1.5*dx, 0.5*dy>
+            <sRadio+2.5*dx, 1.0*dy>
             <sRadio+3.0*dx, 1.5*dy>
             <sRadio+3.5*dx, 2.0*dy>
             <sRadio+4.0*dx, 2.5*dy>
@@ -74,10 +74,11 @@
     }
 
     object {
-        FatVase(0.6, 0.6, 0.4)
+        FatVase(0.8, 0.8, 0.5)
         texture {
             pigment { DarkBrown }
             finish { phong 1 }
         }
+        rotate 30*x
     }
 #end
