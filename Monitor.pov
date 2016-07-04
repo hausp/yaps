@@ -2,6 +2,7 @@
 
 #include "colors.inc"
 #include "shapes.inc"
+#include "Utils.pov"
 
 #local debugMode = 0;
 #if (debugMode)
@@ -28,7 +29,7 @@
                 <0, baseY, 0>,
                 <0, baseY + neckHeight, 0>,
                 neckRadius
-            }        
+            }
 
             finish {
                 reflection 0.02        
@@ -42,17 +43,18 @@
             }
 
             object {
-                Wire_Box(
+                Frame(
                     <-screenWidth/2, -screenHeight/2, -screenThickness/2 - 0.005>,
-                    <screenWidth/2, screenHeight/2, -screenThickness/2>
-                    0.02, 0
+                    <screenWidth/2, screenHeight/2, -screenThickness/2>,
+                    screenThickness
                 )
+                //Frame(screenWidth, screenHeight, screenThickness, 0.0025)
                 pigment { rgb<0.4, 0.4, 0.4> }
+                //translate <0, 0, -screenThickness/2 - 0.0025>
             }
 
             rotate x * ang
             translate y * (baseY + neckHeight + screenHeight/6)
-            //translate z * -neckRadius
         }
 
         finish {
@@ -84,8 +86,8 @@
     }
 
     object {
-        Monitor(0.8, 0.5, 0.07, 0.8, 0.02, 0.5, 0.5, 0.04)
-        //rotate y * 180
+        Monitor(0.8, 0.5, 0.05, 0.8, 0.02, 0.5, 0.5, 0.04)
+        //rotate y * 45
         scale 1.5
         translate <0, -1, 1.5>
     }

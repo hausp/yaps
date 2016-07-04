@@ -14,10 +14,6 @@ global_settings {
 #include "TrashCan.pov"
 #include "Window.pov"
 
-//#local winHeightRow1 = 0.2;
-//#local winHeightRow2 = 0.7;
-//#local winHeightRow3 = 0.5;
-//#local winBorderRadius = 0.02;
 #local winHeightRow1 = 1.5;
 #local winHeightRow2 = 4;
 #local winHeightRow3 = 2.8;
@@ -182,14 +178,14 @@ object {
 
 // Monitors
 object {
-    Monitor(0.8, 0.5, 0.07, 0.8, 0.02, 0.5, 0.5, 0.04)
+    Monitor(0.8, 0.5, 0.05, 0.8, 0.02, 0.5, 0.5, 0.04)
     rotate y * 60
     scale 1.5
     translate <-7.5, 0, 10 + offsetZ>
 }
 
 object {
-    Monitor(0.8, 0.5, 0.07, 0.8, 0.02, 0.5, 0.5, 0.04)
+    Monitor(0.8, 0.5, 0.05, 0.8, 0.02, 0.5, 0.5, 0.04)
     rotate y * 90
     scale 1.5
     translate <1.2, 0, 10 + offsetZ>
