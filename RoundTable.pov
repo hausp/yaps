@@ -2,6 +2,7 @@
 
 #include "colors.inc"
 #include "textures.inc"
+#include "finish.inc"
 
 #local debugMode = 1;
 #if (debugMode)
@@ -14,11 +15,12 @@
 // ----------------------------------------
 // Table
 // ----------------------------------------
+
 #macro RoundTable(height, radio, thick)
     #local yTop = height / 2;
-    #local fHeight = 0.08;
+    #local fHeight = 3 * thick;
     #local fLength = 0.8 * radio;
-    #local fThickness = 0.03;
+    #local fThickness = 1.7 * thick;
     #local sRadio = radio * 0.055;
     union {
         cylinder {
@@ -35,6 +37,11 @@
             <0, yTop - thick, 0>, <0, -yTop, 0>, sRadio
             texture {
                 pigment { Black }
+                finish {
+                    specular 0.7
+                    roughness 0.02
+                    metallic
+                }
             }
         }
         #for (I, 0, 3)
@@ -43,6 +50,11 @@
                 <fLength/2, fHeight/2, fThickness/2>
                 texture {
                     pigment { Black }
+                    finish { 
+                        specular 0.7
+                        roughness 0.02
+                        metallic
+                    }
                 }
                 rotate 5 * z
                 translate (-fLength/2 + sRadio)*x
@@ -79,5 +91,6 @@
         texture {
             pigment { White }
         }
+        rotate 30*x
     }
 #end

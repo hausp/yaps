@@ -13,6 +13,7 @@
 // ----------------------------------------
 // Window
 // ----------------------------------------
+
 #macro Window(winWidth, winHeight, borderRadius, numWindows)
     #local offsetX = numWindows * winWidth / 2;
     union {

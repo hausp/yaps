@@ -14,6 +14,7 @@
 // ----------------------------------------
 // Vase
 // ----------------------------------------
+
 #macro Vase(height, radio, bendOffset, thick, emptyness)
     #local yt = height / 2;
     #local yb = -yt + bendOffset;
