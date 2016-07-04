@@ -6,6 +6,7 @@ global_settings {
 }
 
 #include "Chair.pov"
+#include "Monitor.pov"
 #include "ReservedTableSign.pov"
 #include "RoundTable.pov"
 #include "TrashCan.pov"
@@ -33,7 +34,7 @@ camera {
 
 background { White * 0.5 }
 
-light_source { <0, 2, offsetZ> color White }
+light_source { <-3, 4, 4 + offsetZ> color White }
 
 // Floor
 plane {
@@ -102,6 +103,34 @@ object {
     translate <-3.2, -1, 6 + offsetZ>
 }
 
+object {
+    Chair
+    scale chairScaling
+    rotate y * 180
+    translate <0.2, -1, 9 + offsetZ>
+}
+
+object {
+    Chair
+    scale chairScaling
+    rotate y * 170
+    translate <1.2, -1, 9 + offsetZ>
+}
+
+object {
+    Chair
+    scale chairScaling
+    rotate y * 80
+    translate <4, -1, 11 + offsetZ>
+}
+
+object {
+    Chair
+    scale chairScaling
+    rotate y * 80
+    translate <4, -1, 10 + offsetZ>
+}
+
 // Tables
 object {
     RoundTable(0.8, 0.6, 0.02)
@@ -125,12 +154,27 @@ object {
     TrashCan(0.8, 0.5, 0.3, 0.035, 0.02, 35, 4)
     pigment { Orange }
     scale 0.7
-    translate <-4.2, -1, 9 + offsetZ>
+    translate <-5, -1, 8.5 + offsetZ>
 }
 
 object {
     TrashCan(0.8, 0.5, 0.3, 0.035, 0.02, 35, 10)
     pigment { Yellow }
-    scale 0.7
-    translate <1.5, -1, 9 + offsetZ>
+    scale 0.5
+    translate <2, -1, 9 + offsetZ>
+}
+
+// Monitors
+object {
+    Monitor(0.8, 0.5, 0.07, 0.8, 0.02, 0.5, 0.5, 0.04)
+    rotate y * 60
+    scale 1.5
+    translate <-7.5, 0, 10 + offsetZ>
+}
+
+object {
+    Monitor(0.8, 0.5, 0.07, 0.8, 0.02, 0.5, 0.5, 0.04)
+    rotate y * 90
+    scale 1.5
+    translate <1.2, 0, 10 + offsetZ>
 }

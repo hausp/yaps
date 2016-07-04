@@ -3,7 +3,7 @@
 #include "colors.inc"
 #include "shapes.inc"
 
-#local debugMode = 1;
+#local debugMode = 0;
 #if (debugMode)
     global_settings {
         assumed_gamma 1
@@ -30,6 +30,9 @@
                 neckRadius
             }        
 
+            finish {
+                reflection 0.02        
+            }
         }
 
         union {
@@ -53,7 +56,6 @@
         }
 
         finish {
-            reflection 0.02
             phong 0.9
             phong_size 60
         }
