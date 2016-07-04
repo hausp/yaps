@@ -6,6 +6,8 @@ global_settings {
 }
 
 #include "Chair.pov"
+#include "FatVase.pov"
+#include "MobileOnWheels.pov"
 #include "Monitor.pov"
 #include "ReservedTableSign.pov"
 #include "RoundTable.pov"
@@ -28,7 +30,7 @@ global_settings {
 camera {
     //location <0, 1, -1.5>
     //look_at <0, 1, 1>
-    location <-3.8, 1, offsetZ>
+    location <-3.8, 0.3, offsetZ>
     look_at <9, 0, 1>
 }
 
@@ -82,6 +84,13 @@ plane {
 }
 
 // Chairs
+object {
+    Chair
+    scale chairScaling
+    rotate y * 50
+    translate <-4, -1, 8 + offsetZ>
+}
+
 object {
     Chair
     scale chairScaling
@@ -158,7 +167,7 @@ object {
 
 // Trash Cans
 object {
-    TrashCan(0.8, 0.5, 0.4, 0.035, 0.02, 35, 4)
+    TrashCan(0.8, 0.4, 0.3, 0.035, 0.02, 35, 4)
     pigment { Orange }
     scale 0.7
     translate <-5, -1, 8.5 + offsetZ>
@@ -184,4 +193,22 @@ object {
     rotate y * 90
     scale 1.5
     translate <1.2, 0, 10 + offsetZ>
+}
+
+// Mobile on Wheels
+object {
+    MobileOnWheels(1, 1.6, 1.2, 0.1, 0.05, 0.05)
+    rotate y * 80
+    //rotate x * 90
+    translate <6, -1, 12 + offsetZ>
+}
+
+// Vases
+object {
+    FatVase(0.8, 0.5, 0.3)
+    texture {
+        pigment { DarkBrown }
+        finish { phong 1 }
+    }
+    translate <-4, -1, 12 + offsetZ>
 }

@@ -1,9 +1,10 @@
 #version 3.7;
 
 #include "colors.inc"
+#include "textures.inc"
 #include "shapes.inc"
 
-#local debugMode = 1;
+#local debugMode = 0;
 #if (debugMode)
     global_settings {
         assumed_gamma 1
@@ -35,29 +36,6 @@
     }
 #end
 
-#macro supportBar(minorRadius, majorRadius, barLength)
-    #local totalRadius = minorRadius + majorRadius;
-    union {
-        object {
-            FourthOfATorus(minorRadius, majorRadius)
-            translate <-barLength + totalRadius, minorRadius, -majorRadius>
-        }
-
-        cylinder {
-            <-barLength + totalRadius, 0, 0>,
-            <barLength - totalRadius, 0, 0>,
-            minorRadius
-            translate <0, minorRadius, 0>
-        }
-
-        object {
-            FourthOfATorus(minorRadius, majorRadius)
-            rotate y * 90
-            translate <barLength - totalRadius - 0.01, minorRadius, -majorRadius>
-        }    
-    }
-#end
-
 #macro MobileOnWheels(mWidth, height, length, wheelRadius, wheelThickness, sideThickness)
     #local border = 0.1;
     #local halfW = mWidth / 2;
@@ -65,9 +43,10 @@
     #local heightHole1 = height * 0.25;
     #local heightHole2 = height * 0.35;
     #local minorRadius = 0.03;
-    #local majorRadius = 0.5;
+    #local majorRadius = 0.1;
     #local totalRadius = minorRadius + majorRadius;
-    #local barLength = length - 2 * border;
+    #local experimentalConst1 = -0.45;
+    #local barLength = length - 2 * border + experimentalConst1;
     #local Wheel = cylinder {
         <0, -wheelThickness/2, 0>,
         <0, wheelThickness/2, 0>,
@@ -76,11 +55,32 @@
     }
 
     union {
-        object {
-            supportBar(minorRadius, majorRadius, barLength)
+        union {
+            object {
+                FourthOfATorus(minorRadius, majorRadius)
+                translate <-barLength + totalRadius, minorRadius, -majorRadius>
+                //translate <minorRadius, minorRadius, -majorRadius>
+            }
+
+            cylinder {
+                <-barLength + totalRadius, 0, 0>,
+                <barLength - totalRadius, 0, 0>,
+                minorRadius
+                translate <0, minorRadius, 0>
+            }
+
+            object {
+                FourthOfATorus(minorRadius, majorRadius)
+                rotate y * 90
+                translate <barLength - totalRadius - 0.01, minorRadius, -majorRadius>
+            }
+
             rotate y * 90
-            translate <halfW + totalRadius, height - 2 * border, 0>
-            pigment { Gray }
+            translate <halfW + totalRadius, 2 * wheelRadius + height - 2 * border, 0>
+            //pigment { Gray }
+            texture {
+                Chrome_Metal
+            }
         }
 
         object {
@@ -134,7 +134,7 @@
                 //pigment { Yellow }
             }
 
-            pigment { Blue }
+            pigment { Gray }
         }
     }
 #end
@@ -145,7 +145,7 @@
 
 #if (debugMode)
     camera {
-      location <0, 0, -2.5>
+      location <0, 1, -2.5>
       look_at <0, 0, 1>
     }
 
@@ -161,9 +161,8 @@
     }
 
     object {
-        MobileOnWheels(1, 1.6, 1, 0.1, 0.05, 0.05)
-        //FourthOfATorus(0.1, 0.4)
-        rotate y * 90
+        MobileOnWheels(1, 1.6, 1.2, 0.1, 0.05, 0.05)
+        rotate y * 45
         //rotate x * 90
         translate <0, -1, 1>
     }
