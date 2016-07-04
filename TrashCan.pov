@@ -3,7 +3,7 @@
 #include "colors.inc"
 #include "shapes.inc"
 
-#local debugMode = 1;
+#local debugMode = 0;
 #if (debugMode)
     global_settings {
         assumed_gamma 1
@@ -85,7 +85,7 @@
 
     background { White * 0.5 }
 
-    light_source { <-1, 2, -2> color White }
+    light_source { <-1, 2, -20> color White }
 
     plane {
         y, -1
@@ -97,7 +97,7 @@
     object {
         TrashCan(0.8, 0.5, 0.3, 0.035, 0.02, 35, 4)
         pigment { Orange }
-        translate <0, -1, 1>
+        //translate <0, -1, 1>
         //translate <-0.8, 0, 2>
     }
 

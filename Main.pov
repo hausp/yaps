@@ -7,6 +7,8 @@ global_settings {
 
 #include "Chair.pov"
 #include "ReservedTableSign.pov"
+#include "RoundTable.pov"
+#include "TrashCan.pov"
 #include "Window.pov"
 
 //#local winHeightRow1 = 0.2;
@@ -100,8 +102,28 @@ object {
     translate <-3.2, -1, 6 + offsetZ>
 }
 
+// Tables
+object {
+    RoundTable(0.8, 0.6, 0.02)
+    pigment { White }
+    rotate y * 10
+    scale 1.2
+    // -0.55
+    translate <-3, -0.46, 5 + offsetZ>
+}
+
+// Sign
 object {
     Sign
     rotate y * -15
-    translate <-3, 0.2, 5 + offsetZ>
+    scale 0.8
+    translate <-3, 0.02, 5 + offsetZ>
+}
+
+// Trash Can
+object {
+    TrashCan(0.8, 0.5, 0.3, 0.035, 0.02, 35, 4)
+    pigment { Orange }
+    scale 0.7
+    translate <-4.2, -1, 9 + offsetZ>
 }
