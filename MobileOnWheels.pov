@@ -14,12 +14,60 @@
 // ----------------------------------------
 // MobileOnWheels
 // ----------------------------------------
+#macro FourthOfATorus(minorRadius, majorRadius)
+    #local totalRadius = minorRadius + majorRadius;
+    difference {
+        torus {
+            majorRadius, minorRadius
+        }
+
+        union {
+            box {
+                <-totalRadius, -minorRadius - 0.01, -totalRadius - 0.01>,
+                <totalRadius, minorRadius + 0.01, 0.01>
+            }
+
+            box {
+                <0, -minorRadius - 0.01, -0.01>,
+                <totalRadius, minorRadius + 0.01, totalRadius + 0.01>
+            }            
+        }
+    }
+#end
+
+#macro supportBar(minorRadius, majorRadius, barLength)
+    #local totalRadius = minorRadius + majorRadius;
+    union {
+        object {
+            FourthOfATorus(minorRadius, majorRadius)
+            translate <-barLength + totalRadius, minorRadius, -majorRadius>
+        }
+
+        cylinder {
+            <-barLength + totalRadius, 0, 0>,
+            <barLength - totalRadius, 0, 0>,
+            minorRadius
+            translate <0, minorRadius, 0>
+        }
+
+        object {
+            FourthOfATorus(minorRadius, majorRadius)
+            rotate y * 90
+            translate <barLength - totalRadius - 0.01, minorRadius, -majorRadius>
+        }    
+    }
+#end
+
 #macro MobileOnWheels(mWidth, height, length, wheelRadius, wheelThickness, sideThickness)
     #local border = 0.1;
     #local halfW = mWidth / 2;
     #local halfL = length / 2;
-    #local heightHole1 = height * 0.2;
+    #local heightHole1 = height * 0.25;
     #local heightHole2 = height * 0.35;
+    #local minorRadius = 0.03;
+    #local majorRadius = 0.5;
+    #local totalRadius = minorRadius + majorRadius;
+    #local barLength = length - 2 * border;
     #local Wheel = cylinder {
         <0, -wheelThickness/2, 0>,
         <0, wheelThickness/2, 0>,
@@ -28,6 +76,13 @@
     }
 
     union {
+        object {
+            supportBar(minorRadius, majorRadius, barLength)
+            rotate y * 90
+            translate <halfW + totalRadius, height - 2 * border, 0>
+            pigment { Gray }
+        }
+
         object {
             Wheel
             translate <-halfW + border, wheelRadius, -halfL + border>
@@ -107,7 +162,9 @@
 
     object {
         MobileOnWheels(1, 1.6, 1, 0.1, 0.05, 0.05)
-        rotate y * 30
+        //FourthOfATorus(0.1, 0.4)
+        rotate y * 90
+        //rotate x * 90
         translate <0, -1, 1>
     }
 
