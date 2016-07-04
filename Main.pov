@@ -120,10 +120,17 @@ object {
     translate <-3, 0.02, 5 + offsetZ>
 }
 
-// Trash Can
+// Trash Cans
 object {
     TrashCan(0.8, 0.5, 0.3, 0.035, 0.02, 35, 4)
     pigment { Orange }
     scale 0.7
     translate <-4.2, -1, 9 + offsetZ>
+}
+
+object {
+    TrashCan(0.8, 0.5, 0.3, 0.035, 0.02, 35, 10)
+    pigment { Yellow }
+    scale 0.7
+    translate <1.5, -1, 9 + offsetZ>
 }
