@@ -18,11 +18,26 @@
 #macro SquareTable(tWidth, tHeight, tThickness, absHeight)
     #local yTop = absHeight/2 - tThickness;
     #local sOffset = 0.001 * tWidth;
+    #local spHeight = 0.7 * tHeight;
+    #local spWidth = 0.05 * tWidth;
+    #local spThickness = 0.05 * absHeight;
+    #local fHeight = absHeight - spThickness - tThickness;
+    #local fRadio = spWidth/2;
     merge {
         merge {
             RoundedSquare(tWidth - 2*sOffset, tHeight, tThickness)
             BlackDetails(tWidth, tHeight, tThickness, sOffset)
             translate yTop * y
+        }
+        object {
+            Support(spWidth, spHeight, spThickness, fHeight, fRadio)
+            translate (tWidth/2 - spWidth) * x
+            //translate (yTop - spThickness/2) * y
+        }
+        object {
+            Support(spWidth, spHeight, spThickness, fHeight, fRadio)
+            translate -(tWidth/2 - spWidth) * x
+            //translate (yTop - spThickness/2) * y
         }
     }
 #end
@@ -75,6 +90,24 @@
     }
 #end
 
+
+#macro Support(spWidth, spHeight, spThickness, fHeight, fRadio)
+    merge {
+        box {
+            <-spWidth/2, -spThickness/2, -spHeight/2>,
+            <spWidth/2, spThickness/2, spHeight/2>
+            translate fHeight/2 * y
+        }
+        cylinder {
+            <0, fHeight/2, 0>,
+            <0, -fHeight/2, 0>,
+            fRadio
+        }
+        texture {
+            pigment { Black }
+        }
+    }
+#end
 /*
 #macro AnnoyingDetail(tWidth, tHeight, tThickness, sThickness)
     intersection {
@@ -113,9 +146,11 @@
     }
 
     object {
-        SquareTable(1.5, 0.5, 0.02, 0.9)
+        SquareTable(1.5, 0.5, 0.02, 0.7)
         texture {
             pigment { White }
         }
+        translate 0.5 * y
+        //rotate 90 * y
     }
 #end
