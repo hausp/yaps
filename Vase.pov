@@ -66,12 +66,12 @@
     }
 
     object {
-    Vase(0.6, 0.5, 0.2, 0.05, 0.1)
-    texture {
-        //Brown_Agate scale 0.1
-        pigment { DarkBrown }
-        normal { bumps 0.4 scale 0.05 }
-        finish { phong 1 }
+        Vase(0.6, 0.5, 0.2, 0.05, 0.1)
+        texture {
+            //Brown_Agate scale 0.1
+            pigment { DarkBrown }
+            normal { bumps 0.4 scale 0.05 }
+            finish { phong 1 }
+        }
     }
-}
 #end
