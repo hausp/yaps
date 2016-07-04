@@ -20,8 +20,8 @@
     #local yTop = tHeight / 2;
     #local fHeight = 3 * tThickness;
     #local fLength = 0.8 * tRadio;
-    #local fThickness = 1.7 * tThickness;
-    #local sRadio = tRadio * 0.055;
+    #local fThickness = 0.08 * tRadio;
+    #local sRadio = tRadio * 0.06;
     merge {
         cylinder {
             <0, yTop - tThickness, 0>, <0, yTop, 0>, tRadio
