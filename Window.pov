@@ -2,6 +2,7 @@
 
 #include "colors.inc"
 #include "shapes.inc"
+#include "Utils.pov"
 
 #local debugMode = 0;
 #if (debugMode)
@@ -14,16 +15,15 @@
 // Window
 // ----------------------------------------
 
-#macro Window(winWidth, winHeight, borderRadius, numWindows)
+#macro Window(winWidth, winHeight, thick, numWindows)
     #local offsetX = numWindows * winWidth / 2;
     union {
         #for (I, 0, numWindows - 1)
-            object {
-                Wire_Box(
-                    <I * winWidth - offsetX, 0, 0>,
-                    <(I + 1) * winWidth - offsetX, winHeight, 2 * borderRadius>,
-                    borderRadius, 0)
-            }
+            Frame(
+                <I * winWidth - offsetX, 0, 0>,
+                <(I + 1) * winWidth - offsetX, winHeight, thick>,
+                thick
+            )
         #end
     }
 #end
