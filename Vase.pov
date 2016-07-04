@@ -15,29 +15,29 @@
 // Vase
 // ----------------------------------------
 
-#macro Vase(height, radio, bendOffset, thick, emptyness)
-    #local yt = height / 2;
+#macro Vase(vHeight, vRadio, bendOffset, vThickness, vEmptyness)
+    #local yt = vHeight / 2;
     #local yb = -yt + bendOffset;
-    #local innerRadio = radio - thick;
+    #local innerRadio = vRadio - vThickness;
     merge {
         difference {
             merge {
                 cylinder {
-                    <0, yt, 0>, <0, yb, 0>, radio
+                    <0, yt, 0>, <0, yb, 0>, vRadio
                 }
                 difference {
-                    sphere { <0, yb, 0>, radio }
-                    box { <-radio, -height, -radio>, <radio, -yt, radio> }
+                    sphere { <0, yb, 0>, vRadio }
+                    box { <-vRadio, -vHeight, -vRadio>, <vRadio, -yt, vRadio> }
                 }
             }
             cylinder {
-                <0, height, 0>,
+                <0, vHeight, 0>,
                 <0, -yt, 0>,
                 innerRadio
             }
         }
         cylinder {
-            <0, yt - emptyness, 0>, <0, yb, 0>, innerRadio
+            <0, yt - vEmptyness, 0>, <0, yb, 0>, innerRadio
             texture {
                 pigment { VeryDarkBrown }
             }

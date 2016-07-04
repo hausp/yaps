@@ -16,25 +16,25 @@
 // RoundTable
 // ----------------------------------------
 
-#macro RoundTable(height, radio, thick)
-    #local yTop = height / 2;
-    #local fHeight = 3 * thick;
-    #local fLength = 0.8 * radio;
-    #local fThickness = 1.7 * thick;
-    #local sRadio = radio * 0.055;
+#macro RoundTable(tHeight, tRadio, tThickness)
+    #local yTop = tHeight / 2;
+    #local fHeight = 3 * tThickness;
+    #local fLength = 0.8 * tRadio;
+    #local fThickness = 1.7 * tThickness;
+    #local sRadio = tRadio * 0.055;
     merge {
         cylinder {
-            <0, yTop - thick, 0>, <0, yTop, 0>, radio
+            <0, yTop - tThickness, 0>, <0, yTop, 0>, tRadio
         }
         torus {
-            radio, thick / 2
+            tRadio, tThickness / 2
             texture {
                 pigment { Black }
             }
-            translate y*(yTop - thick/2)
+            translate y*(yTop - tThickness/2)
         }
         cylinder {
-            <0, yTop - thick, 0>, <0, -yTop, 0>, sRadio
+            <0, yTop - tThickness, 0>, <0, -yTop, 0>, sRadio
             texture {
                 pigment { Black }
                 finish {
