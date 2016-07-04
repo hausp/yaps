@@ -95,7 +95,7 @@
     }
 
     object {
-        TrashCan(0.8, 0.5, 0.3, 0.035, 0.02, 35, 4)
+        TrashCan(0.8, 0.5, 0.4, 0.035, 0.02, 35, 4)
         pigment { Orange }
         //translate <0, -1, 1>
         //translate <-0.8, 0, 2>
