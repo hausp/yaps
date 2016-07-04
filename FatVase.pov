@@ -11,45 +11,44 @@
     }
 #end
 
-#macro Base(vHeight, bRadio, sRadio)`
-    sor { 7,
-        <0.000000, 0.000000>
-        <0.100000, 0.000000>
-        <0.200000, 0.540084>
-        <0.210970, 0.827004>
-        <0.194093, 0.962025>
-        <0.286920, 1.000000>
-        <0.468354, 1.033755>
-    }
-#end
-
 // ----------------------------------------
 // FatVase
 // ----------------------------------------
 
-#macro FatVase(vHeight, bRadio, sRadio, vThickness, vEmptyness)
-    #local yTop = vHeight/2;
-    #local tsRadio = 0.07 * bRadio;
+#macro FatVase(vHeight, bRadio, sRadio)
+    #local dx = (bRadio - sRadio)/5;
+    #local dy = vHeight/10;
+    #local mRadio = bRadio * 0.05;
     merge {
-        difference {
-            torus {
-                bRadio, tsRadio
-                translate yTop * y
-            }
-            box {
-                <-(bRadio + tsRadio), yTop + 0.2*tsRadio, -(bRadio + tsRadio)>
-                <bRadio + tsRadio, yTop + 0.2*tsRadio + 1, bRadio + tsRadio>
-            }
+        lathe {
+            cubic_spline
+            17,
+            <0.0000, 0.0000>
+            <sRadio+0.0*dx, 0.0000>
+            <sRadio+0.5*dx, 0.3*dy>
+            <sRadio+1.0*dx, 0.5*dy>
+            <sRadio+2.0*dx, 1.0*dy>
+            <sRadio+3.0*dx, 1.5*dy>
+            <sRadio+3.5*dx, 2.0*dy>
+            <sRadio+4.0*dx, 2.5*dy>
+            <sRadio+4.5*dx, 3.0*dy>
+            <sRadio+5.0*dx, 3.5*dy>
+            <sRadio+5.5*dx, 4.0*dy>
+            <sRadio+6.0*dx, 4.5*dy>
+            <sRadio+6.5*dx, 5.5*dy>
+            <sRadio+6.5*dx, 6.5*dy>
+            <sRadio+6.0*dx, 7.5*dy>
+            <sRadio+4.5*dx, 9.0*dy>
+            <sRadio+4.0*dx, 10.0*dy>
         }
         torus {
-            sRadio, bRadio/2
-            translate (yTop * 0.7)/2 * y
+            bRadio, mRadio
+            translate (9*dy) * y
         }
         cone {
-            <0, yTop/16, 0>, bRadio*1.065
-            <0, -yTop, 0>, sRadio
+            <0, 0, 0>, sRadio
+            <0, 0.5*dy, 0>, sRadio+1.0*dx
         }
-        //threshold .65
     }
 #end
 
@@ -75,14 +74,10 @@
     }
 
     object {
-        FatVase(0.6, 0.5, 0.3, 0.05, 0.1)
-        //Vase
+        FatVase(0.6, 0.6, 0.4)
         texture {
-            //Brown_Agate scale 0.1
             pigment { DarkBrown }
-            normal { bumps 0.4 scale 0.05 }
             finish { phong 1 }
         }
-        //rotate 30*x
     }
 #end

@@ -4,7 +4,7 @@
 #include "textures.inc"
 #include "finish.inc"
 
-#local debugMode = 1;
+#local debugMode = 0;
 #if (debugMode)
     global_settings {
         assumed_gamma 1
