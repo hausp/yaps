@@ -106,6 +106,13 @@ object {
 object {
     Chair
     scale chairScaling
+    rotate y * 60
+    translate <-2.6, -1, 5.7 + offsetZ>
+}
+
+object {
+    Chair
+    scale chairScaling
     rotate y * 180
     translate <0.2, -1, 9 + offsetZ>
 }
