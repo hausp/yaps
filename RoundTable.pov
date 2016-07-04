@@ -4,7 +4,7 @@
 #include "textures.inc"
 #include "finish.inc"
 
-#local debugMode = 0;
+#local debugMode = 1;
 #if (debugMode)
     global_settings {
         assumed_gamma 1
@@ -18,9 +18,9 @@
 
 #macro RoundTable(tHeight, tRadio, tThickness)
     #local yTop = tHeight / 2;
-    #local fHeight = 3 * tThickness;
     #local fLength = 0.8 * tRadio;
-    #local fThickness = 0.08 * tRadio;
+    #local fHeight = 0.1 * tHeight;
+    #local fThickness = 0.05 * tHeight;
     #local sRadio = tRadio * 0.06;
     merge {
         cylinder {
