@@ -13,7 +13,7 @@
 #end
 
 // ----------------------------------------
-// Table
+// RoundTable
 // ----------------------------------------
 
 #macro RoundTable(height, radio, thick)
@@ -22,7 +22,7 @@
     #local fLength = 0.8 * radio;
     #local fThickness = 1.7 * thick;
     #local sRadio = radio * 0.055;
-    union {
+    merge {
         cylinder {
             <0, yTop - thick, 0>, <0, yTop, 0>, radio
         }
@@ -91,6 +91,5 @@
         texture {
             pigment { White }
         }
-        rotate 30*x
     }
 #end

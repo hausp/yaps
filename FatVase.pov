@@ -12,10 +12,10 @@
 #end
 
 // ----------------------------------------
-// Vase
+// FatVase
 // ----------------------------------------
 
-#macro Vase(height, radio, bendOffset, thick, emptyness)
+#macro FatVase(height, radio, bendOffset, thick, emptyness)
     #local yt = height / 2;
     #local yb = -yt + bendOffset;
     #local innerRadio = radio - thick;
@@ -67,7 +67,7 @@
     }
 
     object {
-        Vase(0.6, 0.5, 0.2, 0.05, 0.1)
+        FatVase(0.6, 0.5, 0.2, 0.05, 0.1)
         texture {
             //Brown_Agate scale 0.1
             pigment { DarkBrown }
