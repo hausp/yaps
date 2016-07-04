@@ -25,13 +25,13 @@
                     <0, yt, 0>, <0, yb, 0>, radio
                 }
                 difference {
-                    sphere { <0, yb, 0>, 0.5 }
-                    box { <-1, -1, -1>, <1, -yt, 1> }
+                    sphere { <0, yb, 0>, radio }
+                    box { <-radio, -height, -radio>, <radio, -yt, radio> }
                 }
             }
             cylinder {
-                <0,1,0>,
-                <0,-yt,0>,
+                <0, height, 0>,
+                <0, -yt, 0>,
                 innerRadio
             }
         }
