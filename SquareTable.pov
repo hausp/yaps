@@ -3,7 +3,7 @@
 #include "colors.inc"
 #include "textures.inc"
 #include "shapes.inc"
-#include "utils.pov"
+#include "Utils.pov"
 
 #local debugMode = 1;
 #if (debugMode)
