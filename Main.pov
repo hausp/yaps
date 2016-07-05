@@ -33,7 +33,7 @@ global_settings {
 #local winBorderRadius = 0.07;
 #local winWidth = 0.95;
 #local numWindows = roomWidth / winWidth;
-//#local chairScaling = 1.5;
+#local chairScaling = 1.5;
 #local lampRadius = 0.03;
 #local lampLength = 1;
 #local lampIntensity = 0.15;
@@ -185,8 +185,7 @@ union {
 #local x1 = 11.35;
 #local x2 = 13.2;
 #local x3 = 15;
-#local x4 = 17.3;
-
+#local x4 = 17.8;
 union {
     object {
         Lamp(lampLength, lampRadius, lampIntensity, 0)
@@ -266,8 +265,73 @@ union {
 
     object {
         Lamp(lampLength, lampRadius, lampIntensity, 1)
-        translate <x4, 0, 33.75>
+        translate <x4, 0, 34>
     }
 
     translate <0, roomHeight - lampRadius - 0.05, 0>
 }
+
+// Chairs
+/*object {
+    Chair
+    scale chairScaling
+    rotate y * 50
+    translate <-4, -1, 8>
+}
+
+object {
+    Chair
+    scale chairScaling
+    rotate y * -120
+    translate <-3.5, -1, 5>
+}
+
+object {
+    Chair
+    scale chairScaling
+    rotate y * 150
+    translate <-2.5, -1, 5>
+}
+
+object {
+    Chair
+    scale chairScaling
+    rotate y * -30
+    translate <-3.2, -1, 6>
+}
+
+object {
+    Chair
+    scale chairScaling
+    rotate y * 60
+    translate <-2.6, -1, 5.7>
+}
+
+object {
+    Chair
+    scale chairScaling
+    rotate y * 180
+    translate <0.2, -1, 9>
+}
+
+object {
+    Chair
+    scale chairScaling
+    rotate y * 170
+    translate <1.2, -1, 9>
+}
+
+object {
+    Chair
+    scale chairScaling
+    rotate y * 80
+    translate <4, -1, 11>
+}
+
+object {
+    Chair
+    scale chairScaling
+    rotate y * 80
+    translate <4, -1, 10>
+}
+*/

@@ -20,35 +20,33 @@
     #local totalWidth = 2 * lampRadius + gap;
     #local bodyHeight = 0.06;
     #local thick = 0.002;
-    #local Sheet = union {
-        difference {
+    #local Sheet = difference {
+        cylinder {
+            <0, 0, -length/2>,
+            <0, 0, length/2>,
+            lampRadius
+        }
+
+        union {
             cylinder {
-                <0, 0, -length/2>,
-                <0, 0, length/2>,
-                lampRadius
+                <0, 0, -length/2 - 0.01>,
+                <0, 0, length/2 + 0.01>,
+                lampRadius - thick
             }
 
-            union {
-                cylinder {
-                    <0, 0, -length/2 - 0.01>,
-                    <0, 0, length/2 + 0.01>,
-                    lampRadius - thick
-                }
-
-                box {
-                    <-lampRadius, -lampRadius, -length/2 - 0.01>,
-                    <lampRadius, 0, length/2 + 0.01>
-                }
-
-                box {
-                    <0, 0, -length/2 - 0.01>,
-                    <lampRadius, lampRadius, length/2 + 0.01>
-                }
+            box {
+                <-lampRadius, -lampRadius, -length/2 - 0.01>,
+                <lampRadius, 0, length/2 + 0.01>
             }
-            pigment { Gray }
-            finish {
-                reflection 0.5
+
+            box {
+                <0, 0, -length/2 - 0.01>,
+                <lampRadius, lampRadius, length/2 + 0.01>
             }
+        }
+        pigment { Gray }
+        finish {
+            reflection 0.5
         }
     }
     #local LampBody = union {
