@@ -82,7 +82,6 @@ union {
     #local ceilingStripeOffsetZ = numCeilingRows * ceilingStripeHeight / 2;
     #local p1 = <-ceilingStripeWidth/2, -0.3, -ceilingStripeHeight/2>;
     #local p2 = -p1;
-    #local delta = <0.02, -0.01, 0.02>;
     #local cy = winHeightRow2 + winHeightRow3;
     plane {
         y, cy
@@ -92,14 +91,13 @@ union {
     union {
         #for (I, 0, numCeilingRows - 1)
             #for (J, 0, numCeilingColumns - 1)
-                difference {
-                    box { p1, p2 }
-                    box { p1 + delta, p2 - delta }
+                object {
+                    Frame(p1, p2, 0.02, y)
                     translate <J * ceilingStripeWidth - ceilingStripeOffsetX, 0, I * ceilingStripeHeight - ceilingStripeOffsetZ>
                 }
             #end
         #end
-        rotate y * -10
+        //rotate y * -10
         translate <0, cy + 0.28, 16 + offsetZ>
         texture { Chrome_Metal }
     }

@@ -46,7 +46,8 @@
                 Frame(
                     <-screenWidth/2, -screenHeight/2, -screenThickness/2 - 0.005>,
                     <screenWidth/2, screenHeight/2, -screenThickness/2>,
-                    screenThickness
+                    screenThickness,
+                    z
                 )
                 //Frame(screenWidth, screenHeight, screenThickness, 0.0025)
                 pigment { rgb<0.4, 0.4, 0.4> }

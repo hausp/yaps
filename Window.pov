@@ -22,7 +22,8 @@
             Frame(
                 <I * winWidth - offsetX, 0, 0>,
                 <(I + 1) * winWidth - offsetX, winHeight, thick>,
-                thick
+                thick,
+                z
             )
         #end
     }
