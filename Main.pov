@@ -276,55 +276,55 @@ union {
     object {
         Chair
         rotate y * 50
-        translate <11.9, 0, 30.8>
+        translate <11.9, 0, 31.8>
     }
 
     object {
         Chair
         rotate y * -110
-        translate <11.7, 0, 29>
+        translate <11.7, 0, 30>
     }
 
     object {
         Chair
         rotate y * 150
-        translate <12.3, 0, 28.7>
+        translate <12.3, 0, 29.7>
     }
 
     object {
         Chair
         rotate y * -30
-        translate <12, 0, 29.4>
+        translate <12, 0, 30.4>
     }
 
     object {
         Chair
         rotate y * 75
-        translate <12.6, 0, 29.4>
+        translate <12.6, 0, 30.4>
     }
 
     object {
         Chair
         rotate y * 180
-        translate <13.7, 0, 30.5>
+        translate <13.7, 0, 31.5>
     }
 
     object {
         Chair
         rotate y * 170
-        translate <14.3, 0, 30.5>
+        translate <14.3, 0, 31.5>
     }
 
     object {
         Chair
         rotate y * 85
-        translate <15.4, 0, 31.4>
+        translate <15.8, 0, 32.4>
     }
 
     object {
         Chair
         rotate y * 85
-        translate <15.6, 0, 31>
+        translate <16, 0, 32>
     }
 }
 
@@ -333,7 +333,7 @@ object {
     Sign
     rotate y * -20
     scale 0.6
-    translate <12.1, 0.1 + tableHeight, 29>
+    translate <12.1, 0.1 + tableHeight, 30>
 }
 
 // Tables
@@ -341,13 +341,13 @@ object {
     RoundTable(tableHeight, 0.6, 0.05)
     pigment { White }
     rotate y * 10
-    translate <12.15, 0.1 + tableHeight/2, 29>
+    translate <12.15, 0.1 + tableHeight/2, 30>
 }
 
 object {
     SquareTable(1.1, 0.5, 0.06, tableHeight)
     pigment { White }
-    translate <14.05, 0.05, 31>
+    translate <14.05, 0.05, 32>
 }
 
 // Trash Cans
@@ -355,7 +355,7 @@ object {
     TrashCan(0.8, 0.4, 0.3, 0.035, 0.02, 35, 4)
     pigment { Orange }
     scale 0.4
-    translate <11.7, 0, 32>
+    translate <11.7, 0, 33>
 }
 
 /*object {
