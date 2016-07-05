@@ -29,12 +29,12 @@
 // ----------------------------------------
 
 #macro SquareTable(tWidth, tHeight, tThickness, absHeight)
-    #local yTop = absHeight/2 - tThickness;
+    #local yTop = absHeight - tThickness;
     #local sOffset = 0.001 * tWidth;
     #local spHeight = 0.7 * tHeight;
     #local spWidth = 0.05 * tWidth;
     #local spThickness = 0.05 * absHeight;
-    #local lHeight = absHeight - spThickness - tThickness;
+    #local lTop = yTop - spThickness;
     #local lRadio = spWidth/2;
     #local fHeight = 0.6 * tHeight;
     merge {
@@ -44,11 +44,11 @@
             translate yTop * y
         }
         object {
-            Support(spWidth, spHeight, spThickness, lHeight, lRadio, fHeight)
+            Support(spWidth, spHeight, spThickness, lTop, lRadio, fHeight)
             translate (tWidth/2 - spWidth) * x
         }
         object {
-            Support(spWidth, spHeight, spThickness, lHeight, lRadio, fHeight)
+            Support(spWidth, spHeight, spThickness, lTop, lRadio, fHeight)
             translate -(tWidth/2 - spWidth) * x
         }
     }
@@ -101,18 +101,18 @@
 #end
 
 
-#macro Support(spWidth, spHeight, spThickness, lHeight, lRadio, fHeight)
+#macro Support(spWidth, spHeight, spThickness, lTop, lRadio, fHeight)
     #local fRadio = 1.15 * lRadio;
     merge {
         box {
             <-spWidth/2, -spThickness/2, -spHeight/2>,
             <spWidth/2, spThickness/2, spHeight/2>
-            translate lHeight/2 * y
+            translate (lTop + spThickness/2) * y
         }
 
         cylinder {
-            <0, lHeight/2, 0>,
-            <0, -lHeight/2, 0>,
+            <0, lTop, 0>,
+            <0, 0, 0>,
             lRadio
             translate -(0.2 * spHeight) * z
         }
@@ -120,17 +120,17 @@
         difference {
             merge {
                 sphere {
-                    <0, -lHeight/2, spHeight/2>, fRadio
+                    <0, 0, spHeight/2>, fRadio
                 }
                 sphere {
-                    <0, -lHeight/2, -spHeight/2>, fRadio
+                    <0, 0, -spHeight/2>, fRadio
                 }
-                Connect_Spheres(<0, -lHeight/2, spHeight/2>, fRadio,
-                                <0, -lHeight/2, -spHeight/2>, fRadio)
+                Connect_Spheres(<0, 0, spHeight/2>, fRadio,
+                                <0, 0, -spHeight/2>, fRadio)
             }
             box {
-                <-spHeight, -lHeight/2, fHeight>,
-                <spHeight, -lHeight, -fHeight>
+                <-spHeight, 0, fHeight>,
+                <spHeight, -lTop, -fHeight>
             }
         }
         texture { NiceTexture }
@@ -174,7 +174,7 @@
     }
 
     object {
-        SquareTable(1.5, 0.5, 0.02, 0.7)
+        SquareTable(1.5, 0.5, 0.02, 0.5)
         texture {
             pigment { White }
         }
