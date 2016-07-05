@@ -74,35 +74,35 @@ union {
 
 // Ceiling
 union {
-    /*#local numCeilingRows = 10;
-    #local numCeilingColumns = 7;
-    #local ceilingStripeWidth = 3;
-    #local ceilingStripeHeight = 1.2;
-    #local ceilingStripeOffsetX = numCeilingColumns * ceilingStripeWidth / 2;*/
-    #local cy = winHeightRow2 + winHeightRow3;
-    /*#local p1 = <-ceilingStripeWidth/2, -0.3, -ceilingStripeHeight/2>;
+    #local numCeilingRows = 15;
+    #local numCeilingColumns = 9;
+    #local ceilingStripeWidth = 3.5;
+    #local ceilingStripeHeight = 1;
+    #local ceilingStripeOffsetX = numCeilingColumns * ceilingStripeWidth / 2;
+    #local ceilingStripeOffsetZ = numCeilingRows * ceilingStripeHeight / 2;
+    #local p1 = <-ceilingStripeWidth/2, -0.3, -ceilingStripeHeight/2>;
     #local p2 = -p1;
-    #local delta = <0.02, -0.01, 0.02>;*/
+    #local delta = <0.02, -0.01, 0.02>;
+    #local cy = winHeightRow2 + winHeightRow3;
     plane {
         y, cy
         pigment { Gray }
     }
 
-    /*union {
-        //#for (I, 0, numCeilingRows - 1)
+    union {
+        #for (I, 0, numCeilingRows - 1)
             #for (J, 0, numCeilingColumns - 1)
                 difference {
                     box { p1, p2 }
                     box { p1 + delta, p2 - delta }
-                    //rotate x * 90
-                    rotate y * 55
-                    translate <J * ceilingStripeWidth, cy - 1, 16 + offsetZ>
+                    translate <J * ceilingStripeWidth - ceilingStripeOffsetX, 0, I * ceilingStripeHeight - ceilingStripeOffsetZ>
                 }
-                //<J * ceilingStripeWidth - ceilingStripeOffsetX, cy, 0>,
-                //<(J + 1) * winWidth - ceilingStripeOffsetX, cy, ceilingStripeHeight>,
             #end
-        //#end
-    }*/
+        #end
+        rotate y * -10
+        translate <0, cy + 0.28, 16 + offsetZ>
+        texture { Chrome_Metal }
+    }
 }
 
 // Chairs
