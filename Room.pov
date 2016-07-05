@@ -47,8 +47,6 @@ camera {
 
 background { rgb<135/255, 206/255, 250/255> }
 
-
-
 light_source {
     <13, roomHeight/2, roomDepth/2>
     color White
@@ -78,20 +76,20 @@ difference {
 // Ceiling
 union {
     #local csWidth = 1;
-    #local csHeight = 0.5;
+    #local csHeight = 0.7;
     #local nRows = ceil(roomWidth/csWidth);
     #local nColumns = ceil(roomDepth/csHeight);
 
     #for (I, 0, nRows)
         box {
             <roomWidth/2 - I * csWidth, roomHeight, -roomDepth/2>,
-            <roomWidth/2 - I * csWidth + 0.02, roomHeight - 0.01, roomDepth/2>
+            <roomWidth/2 - I * csWidth + 0.02, roomHeight - 0.002, roomDepth/2>
         }
     #end
     #for (I, 0, nColumns)
         box {
             <-roomWidth/2, roomHeight, roomDepth/2 - I * csHeight>,
-            <roomWidth/2, roomHeight - 0.01, roomDepth/2 - I * csHeight + 0.02>
+            <roomWidth/2, roomHeight - 0.002, roomDepth/2 - I * csHeight + 0.02>
         }
     #end
     texture { Chrome_Metal }
@@ -100,34 +98,48 @@ union {
 // Floor
 merge {
     #local fSize = 0.45;
-    box {
-        <-roomWidth/2, 0, -roomDepth/2>,
-        <roomWidth/2, 0.05, roomDepth/2>
-        texture {
-            pigment {
-                rgb<122/255, 113/255, 98/255>
-            }
-            finish {
-                crand 0.1       
+    difference {
+        box {
+            <-roomWidth/2, 0, -roomDepth/2>,
+            <roomWidth/2, 0.05, roomDepth/2>
+            texture {
+                pigment {
+                    rgb<122/255, 113/255, 98/255>
+                }
+                finish {
+                    crand 0.1       
+                }
             }
         }
+        // horizontal stripes
+        #for (I, 0, ceil(roomWidth/fSize))
+            box {
+                <roomWidth/2 - I * fSize, 0.06, -roomDepth/2>,
+                <roomWidth/2 - I * fSize + 0.02, 0, roomDepth/2>
+            }
+        #end
+        // vertical stripes
+        #for (I, 0, ceil(roomDepth/fSize))
+            box {
+                <-roomWidth/2, 0.06, roomDepth/2 - I * fSize>,
+                <roomWidth/2, 0, roomDepth/2 - I * fSize + 0.02>
+            }
+        #end
     }
     // horizontal stripes
     #for (I, 0, ceil(roomWidth/fSize))
         box {
-            <roomWidth/2 - I * fSize, 0.05, -roomDepth/2>,
-            <roomWidth/2 - I * fSize + 0.02, 0.03, roomDepth/2>
+            <roomWidth/2 - I * fSize, 0.048, -roomDepth/2>,
+            <roomWidth/2 - I * fSize + 0.02, 0, roomDepth/2>
             texture { pigment { Black } }
         }
     #end
     // vertical stripes
     #for (I, 0, ceil(roomDepth/fSize))
         box {
-            <-roomWidth/2, 0.05, roomDepth/2 - I * fSize>,
-            <roomWidth/2, 0.03, roomDepth/2 - I * fSize + 0.02>
+            <-roomWidth/2, 0.048, roomDepth/2 - I * fSize>,
+            <roomWidth/2, 0, roomDepth/2 - I * fSize + 0.02>
             texture { pigment { Black } }
         }
     #end
 }
-
-
