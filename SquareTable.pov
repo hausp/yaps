@@ -26,6 +26,8 @@
     #local lTop = yTop - spThickness;
     #local lRadio = spWidth/2;
     #local fHeight = 0.6 * tHeight;
+    #local bWidth = tWidth - 2 * spWidth;
+    #local bHeight = 0.55 * lTop;
     merge {
         merge {
             RoundedSquare(tWidth - 2*sOffset, tHeight, tThickness)
@@ -40,6 +42,21 @@
             Support(spWidth, spHeight, spThickness, lTop, lRadio, fHeight)
             translate -(tWidth/2 - spWidth) * x
         }
+        merge {
+            box {
+                <-bWidth/2, -bHeight/2, -tThickness/2>,
+                <bWidth/2, bHeight/2, tThickness/2>
+            }
+            object {
+                Borders(<-bWidth/2, -bHeight/2, -tThickness/2>,
+                       <bWidth/2, bHeight/2, tThickness/2>,
+                       0.1 * tThickness)
+                texture { pigment { Black } }
+            }
+            translate 0.66 * lTop * y
+            translate -(0.2 * spHeight + lRadio + tThickness/2) * z
+        }
+
     }
 #end
 
@@ -126,29 +143,13 @@
     }
 #end
 
-#macro SupportBoard(bWidth, bHeight, bThickness)
-
-#end
-
-#macro BlackBorders(bWidth, bHeight, bThickness)
-
-#end
-
-/*
-#macro AnnoyingDetail(tWidth, tHeight, tThickness, sThickness)
-    intersection {
-        box {
-            <-tWidth/2, 0, -tHeight>,
-            <-tWidth/2 + sThickness, tThickness, tHeight>
-        }
-        RoundedSquare(tWidth, tHeight, tThickness)
-        texture {
-            pigment { Black }
-        }
-        translate (tWidth/2 - sThickness/2) * x
+#macro Borders(p1, p2, bThickness)
+    difference {
+        box { <p1.x - bThickness, p1.y - bThickness, p1.z>,
+              <p2.x + bThickness, p2.y + bThickness, p2.z> }
+        box { p1, p2 }
     }
 #end
-*/
 
 // ----------------------------------------
 // Scene
@@ -176,8 +177,5 @@
         texture {
             pigment { White }
         }
-        //translate 0.2 * y
-        //rotate 90 * y
-        //rotate 30 * x
     }
 #end
