@@ -2,6 +2,7 @@
 
 #include "colors.inc"
 #include "textures.inc"
+#include "shapes.inc"
 
 #local debugMode = 1;
 #if (debugMode)
@@ -10,6 +11,18 @@
         charset utf8
     }
 #end
+
+#declare NiceTexture = texture {
+    pigment { rgb<0.01, 0.01, 0.01> }
+    finish {
+        specular albedo 0.5
+        roughness 0.01
+        diffuse albedo 0.3
+        ambient 0.2
+        brilliance 10.0
+        metallic
+    }
+}
 
 // ----------------------------------------
 // SquareTable
@@ -21,8 +34,9 @@
     #local spHeight = 0.7 * tHeight;
     #local spWidth = 0.05 * tWidth;
     #local spThickness = 0.05 * absHeight;
-    #local fHeight = absHeight - spThickness - tThickness;
-    #local fRadio = spWidth/2;
+    #local lHeight = absHeight - spThickness - tThickness;
+    #local lRadio = spWidth/2;
+    #local fHeight = 0.6 * tHeight;
     merge {
         merge {
             RoundedSquare(tWidth - 2*sOffset, tHeight, tThickness)
@@ -30,14 +44,12 @@
             translate yTop * y
         }
         object {
-            Support(spWidth, spHeight, spThickness, fHeight, fRadio)
+            Support(spWidth, spHeight, spThickness, lHeight, lRadio, fHeight)
             translate (tWidth/2 - spWidth) * x
-            //translate (yTop - spThickness/2) * y
         }
         object {
-            Support(spWidth, spHeight, spThickness, fHeight, fRadio)
+            Support(spWidth, spHeight, spThickness, lHeight, lRadio, fHeight)
             translate -(tWidth/2 - spWidth) * x
-            //translate (yTop - spThickness/2) * y
         }
     }
 #end
@@ -84,28 +96,44 @@
             }
         }
         RoundedSquare(tWidth, tHeight, tThickness)
-        texture {
-            pigment { Black }
-        }
+        texture { NiceTexture }
     }
 #end
 
 
-#macro Support(spWidth, spHeight, spThickness, fHeight, fRadio)
+#macro Support(spWidth, spHeight, spThickness, lHeight, lRadio, fHeight)
+    #local fRadio = 1.15 * lRadio;
     merge {
         box {
             <-spWidth/2, -spThickness/2, -spHeight/2>,
             <spWidth/2, spThickness/2, spHeight/2>
-            translate fHeight/2 * y
+            translate lHeight/2 * y
         }
+
         cylinder {
-            <0, fHeight/2, 0>,
-            <0, -fHeight/2, 0>,
-            fRadio
+            <0, lHeight/2, 0>,
+            <0, -lHeight/2, 0>,
+            lRadio
+            translate -(0.2 * spHeight) * z
         }
-        texture {
-            pigment { Black }
+
+        difference {
+            merge {
+                sphere {
+                    <0, -lHeight/2, spHeight/2>, fRadio
+                }
+                sphere {
+                    <0, -lHeight/2, -spHeight/2>, fRadio
+                }
+                Connect_Spheres(<0, -lHeight/2, spHeight/2>, fRadio,
+                                <0, -lHeight/2, -spHeight/2>, fRadio)
+            }
+            box {
+                <-spHeight, -lHeight/2, fHeight>,
+                <spHeight, -lHeight, -fHeight>
+            }
         }
+        texture { NiceTexture }
     }
 #end
 /*
@@ -151,6 +179,6 @@
             pigment { White }
         }
         translate 0.5 * y
-        //rotate 90 * y
+        rotate 90 * y
     }
 #end
