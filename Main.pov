@@ -11,6 +11,7 @@ global_settings {
 #include "Monitor.pov"
 #include "ReservedTableSign.pov"
 #include "RoundTable.pov"
+#include "SquareTable.pov"
 #include "TrashCan.pov"
 #include "Window.pov"
 
@@ -72,11 +73,36 @@ union {
 }
 
 // Ceiling
-plane {
-    y, winHeightRow2 + winHeightRow3
-    texture {
+union {
+    /*#local numCeilingRows = 10;
+    #local numCeilingColumns = 7;
+    #local ceilingStripeWidth = 3;
+    #local ceilingStripeHeight = 1.2;
+    #local ceilingStripeOffsetX = numCeilingColumns * ceilingStripeWidth / 2;
+    #local cy = winHeightRow2 + winHeightRow3;
+    #local p1 = <-ceilingStripeWidth/2, -0.3, -ceilingStripeHeight/2>;
+    #local p2 = -p1;
+    #local delta = <0.02, -0.01, 0.02>;*/
+    plane {
+        y, cy
         pigment { Gray }
     }
+
+    /*union {
+        //#for (I, 0, numCeilingRows - 1)
+            #for (J, 0, numCeilingColumns - 1)
+                difference {
+                    box { p1, p2 }
+                    box { p1 + delta, p2 - delta }
+                    //rotate x * 90
+                    rotate y * 55
+                    translate <J * ceilingStripeWidth, cy - 1, 16 + offsetZ>
+                }
+                //<J * ceilingStripeWidth - ceilingStripeOffsetX, cy, 0>,
+                //<(J + 1) * winWidth - ceilingStripeOffsetX, cy, ceilingStripeHeight>,
+            #end
+        //#end
+    }*/
 }
 
 // Chairs
@@ -149,8 +175,13 @@ object {
     pigment { White }
     rotate y * 10
     scale 1.2
-    // -0.55
     translate <-3, -0.46, 5 + offsetZ>
+}
+
+object {
+    SquareTable(2, 0.5, 0.06, 1)
+    pigment { White }
+    translate <0.5, -1, 9.5 + offsetZ>
 }
 
 // Sign
@@ -188,7 +219,7 @@ object {
     Monitor(0.8, 0.5, 0.05, 0.8, 0.02, 0.5, 0.5, 0.04)
     rotate y * 90
     scale 1.5
-    translate <1.2, 0, 10 + offsetZ>
+    translate <1.2, 0, 11 + offsetZ>
 }
 
 // Mobile on Wheels
