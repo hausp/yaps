@@ -19,7 +19,7 @@
 
 #macro RoundTable(tHeight, tRadio, tThickness)
     #local yTop = tHeight / 2;
-    #local fLength = 0.8 * tRadio;
+    #local fLength = 0.9 * tRadio;
     #local fHeight = 0.1 * tHeight;
     #local fThickness = 0.05 * tHeight;
     #local sRadio = tRadio * 0.06;

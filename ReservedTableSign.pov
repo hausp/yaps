@@ -39,7 +39,7 @@
 
     // Body
     box {
-        <contentLowerX, diameter, 0>,
+        <contentLowerX - 0.01, diameter, 0>,
         <contentUpperX, signHeight - diameter, 0>
         pigment { Orange }
     }
