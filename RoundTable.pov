@@ -3,6 +3,7 @@
 #include "colors.inc"
 #include "textures.inc"
 #include "finish.inc"
+#include "utils.pov"
 
 #local debugMode = 0;
 #if (debugMode)
@@ -35,27 +36,13 @@
         }
         cylinder {
             <0, yTop - tThickness, 0>, <0, -yTop, 0>, sRadio
-            texture {
-                pigment { Black }
-                finish {
-                    specular 0.7
-                    roughness 0.02
-                    metallic
-                }
-            }
+            texture { BlackMetal }
         }
         #for (I, 0, 3)
             box {
                 <-fLength/2, -fHeight/2, -fThickness/2>,
                 <fLength/2, fHeight/2, fThickness/2>
-                texture {
-                    pigment { Black }
-                    finish { 
-                        specular 0.7
-                        roughness 0.02
-                        metallic
-                    }
-                }
+                texture { BlackMetal }
                 rotate 5 * z
                 translate (-fLength/2 + sRadio)*x
                 translate (-yTop)*y

@@ -3,6 +3,7 @@
 #include "colors.inc"
 #include "textures.inc"
 #include "shapes.inc"
+#include "utils.pov"
 
 #local debugMode = 1;
 #if (debugMode)
@@ -12,18 +13,6 @@
     }
 #end
 
-#declare NiceTexture = texture {
-    pigment { rgb<0.01, 0.01, 0.01> }
-    finish {
-        specular albedo 0.5
-        roughness 0.01
-        diffuse albedo 0.3
-        ambient 0.2
-        brilliance 10.0
-        metallic
-    }
-}
-
 // ----------------------------------------
 // SquareTable
 // ----------------------------------------
@@ -32,7 +21,7 @@
     #local yTop = absHeight - tThickness;
     #local sOffset = 0.001 * tWidth;
     #local spHeight = 0.7 * tHeight;
-    #local spWidth = 0.05 * tWidth;
+    #local spWidth = 0.1 * absHeight;
     #local spThickness = 0.05 * absHeight;
     #local lTop = yTop - spThickness;
     #local lRadio = spWidth/2;
@@ -96,7 +85,7 @@
             }
         }
         RoundedSquare(tWidth, tHeight, tThickness)
-        texture { NiceTexture }
+        texture { BlackMetal }
     }
 #end
 
@@ -133,9 +122,18 @@
                 <spHeight, -lTop, -fHeight>
             }
         }
-        texture { NiceTexture }
+        texture { BlackMetal }
     }
 #end
+
+#macro SupportBoard(bWidth, bHeight, bThickness)
+
+#end
+
+#macro BlackBorders(bWidth, bHeight, bThickness)
+
+#end
+
 /*
 #macro AnnoyingDetail(tWidth, tHeight, tThickness, sThickness)
     intersection {
@@ -174,11 +172,12 @@
     }
 
     object {
-        SquareTable(1.5, 0.5, 0.02, 0.5)
+        SquareTable(1.5, 0.7, 0.02, 0.8)
         texture {
             pigment { White }
         }
-        translate 0.5 * y
-        rotate 90 * y
+        //translate 0.2 * y
+        //rotate 90 * y
+        //rotate 30 * x
     }
 #end
