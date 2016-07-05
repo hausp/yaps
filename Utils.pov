@@ -9,13 +9,14 @@
 #end
 
 #declare BlackMetal = texture {
-    pigment { rgb<0.01, 0.01, 0.01> }
+    pigment { rgb<0.001, 0.001, 0.001> }
     finish {
-        specular albedo 0.5
-        roughness 0.01
-        diffuse albedo 0.3
+        specular albedo 0.3
+        roughness 0.1
+        diffuse albedo 0.2
         ambient 0.2
-        brilliance 10.0
-        metallic
+        brilliance 5.0
+        reflection { 0.003 }
+        metallic 0.99
     }
 }
