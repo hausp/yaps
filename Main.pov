@@ -78,9 +78,9 @@ union {
     #local numCeilingColumns = 7;
     #local ceilingStripeWidth = 3;
     #local ceilingStripeHeight = 1.2;
-    #local ceilingStripeOffsetX = numCeilingColumns * ceilingStripeWidth / 2;
+    #local ceilingStripeOffsetX = numCeilingColumns * ceilingStripeWidth / 2;*/
     #local cy = winHeightRow2 + winHeightRow3;
-    #local p1 = <-ceilingStripeWidth/2, -0.3, -ceilingStripeHeight/2>;
+    /*#local p1 = <-ceilingStripeWidth/2, -0.3, -ceilingStripeHeight/2>;
     #local p2 = -p1;
     #local delta = <0.02, -0.01, 0.02>;*/
     plane {
