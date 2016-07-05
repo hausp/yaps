@@ -96,21 +96,14 @@ union {
 }
 
 // Floor
-merge {
+union {
     #local fSize = 0.45;
     difference {
         box {
             <-roomWidth/2, 0, -roomDepth/2>,
             <roomWidth/2, 0.05, roomDepth/2>
-            texture {
-                pigment {
-                    rgb<122/255, 113/255, 98/255>
-                }
-                finish {
-                    crand 0.1       
-                }
-            }
         }
+
         // horizontal stripes
         #for (I, 0, ceil(roomWidth/fSize))
             box {
@@ -125,6 +118,16 @@ merge {
                 <roomWidth/2, 0, roomDepth/2 - I * fSize + 0.02>
             }
         #end
+
+        texture {
+            pigment {
+                rgb<122/255, 113/255, 98/255>
+            }
+        }
+
+        finish {
+            crand 0.1
+        }
     }
     // horizontal stripes
     #for (I, 0, ceil(roomWidth/fSize))
