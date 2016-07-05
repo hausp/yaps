@@ -21,7 +21,7 @@ global_settings {
 #declare roomWidth = 75;
 #declare roomDepth = 75;
 
-#declare Camera_Location = <9.7, 1.6, roomDepth/2 - 17.5>;
+#declare Camera_Location = <9.7, 1.6, roomDepth/2 - 17.8>;
 #declare Camera_Look_At  = <14.7, 2, roomDepth/2>;
 #declare Camera_Angle    =  30;
 

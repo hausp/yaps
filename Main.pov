@@ -5,6 +5,8 @@ global_settings {
     charset utf8
 }
 
+#include "transforms.inc"
+
 #include "Chair.pov"
 #include "FatVase.pov"
 #include "Lamp.pov"
@@ -16,57 +18,150 @@ global_settings {
 #include "TrashCan.pov"
 #include "Window.pov"
 
-#local winHeightRow1 = 1.5;
-#local winHeightRow2 = 4;
-#local winHeightRow3 = 2.8;
-#local winWidth = 2.5;
-#local winBorderRadius = 0.1;
-#local numWindows = 12;
-#local chairScaling = 1.5;
-#local offsetZ = -100;
-#local numCeilingRows = 15;
-#local numCeilingColumns = 9;
-#local ceilingStripeWidth = 3.5;
-#local ceilingStripeHeight = 1;
-#local ceilingStripeOffsetX = numCeilingColumns * ceilingStripeWidth / 2;
-#local ceilingStripeOffsetZ = numCeilingRows * ceilingStripeHeight / 2;
-#local p1 = <-ceilingStripeWidth/2, -0.3, -ceilingStripeHeight/2>;
-#local p2 = -p1;
-#local cy = winHeightRow2 + winHeightRow3;
-#local lampRadius = 0.07;
-#local lampLength = 1.6;
+
+#declare roomHeight = 3.0;
+#declare roomWidth = 75;
+#declare roomDepth = 75;
+
+#declare Camera_Location = <9.7, 1.6, roomDepth/2 - 17.8>;
+#declare Camera_Look_At  = <14.7, 2, roomDepth/2>;
+#declare Camera_Angle    =  30;
+
+#local winHeightRow1 = 0.6;
+#local winHeightRow2 = 1.8;
+#local winHeightRow3 = 0.8;
+#local winBorderRadius = 0.07;
+#local winWidth = 0.95;
+#local numWindows = roomWidth / winWidth;
+//#local chairScaling = 1.5;
+#local lampRadius = 0.03;
+#local lampLength = 1;
 #local lampIntensity = 0.15;
 
+/*
+#declare Cam_V = Camera_Look_At - Camera_Location;
+#declare Cam_Ho = sqrt(pow(Cam_V.x,2)+pow(Cam_V.z ,2));
+#declare Cam_Y  = Camera_Look_At.y - Camera_Location.y;
+//--------------------------------------------------//
+camera{ angle Camera_Angle
+        right x*image_width/image_height
+        location<0,Camera_Look_At.y,-Cam_Ho>
+        matrix<1,0,0, 0,1,0, 0,Cam_Y/Cam_Ho,1, 0,0,0>
+        Reorient_Trans(z,<Cam_V.x,0,Cam_V.z>)
+        translate<Camera_Look_At.x,0,Camera_Look_At.z>
+      } //------------------------------------------//
+*/
 camera {
-    //location <0, 1, -1.5>
-    //look_at <0, 1, 1>
-    location <-3.8, 0.3, offsetZ>
-    look_at <9, 0, 1>
+    location Camera_Location
+    right x*image_width/image_height
+    look_at Camera_Look_At
+    angle Camera_Angle
 }
 
-background { White * 0.5 }
+background { rgb<135/255, 206/255, 250/255> }
 
-//light_source { <-3, 4, 4 + offsetZ> color White }
+light_source {
+    <13, roomHeight + 1, roomDepth/2>
+    color White
+}
+
+// Room
+difference {
+    // outer box
+    box {
+        <-(roomWidth/2 + 0.5), -0.5, -(roomDepth/2 + 0.5)>,
+        <(roomWidth/2 + 0.5), roomHeight + 0.5, (roomDepth/2 + 0.5)>
+    }
+    // inner box
+    box {
+        <-roomWidth/2, 0, -roomDepth/2>,
+        <roomWidth/2, roomHeight, roomDepth/2>
+    }
+    // windows box
+    box {
+        <-roomWidth/2, 0, roomDepth/2 + 5>,
+        <roomWidth/2, roomHeight, roomDepth/2>
+    }
+    // That can be ceil color
+    texture { pigment { Grey } }
+}
+
+// Ceiling
+union {
+    #local csWidth = 1;
+    #local csHeight = 0.7;
+    #local nRows = ceil(roomWidth/csWidth);
+    #local nColumns = ceil(roomDepth/csHeight);
+
+    #for (I, 0, nRows)
+        box {
+            <roomWidth/2 - I * csWidth, roomHeight, -roomDepth/2>,
+            <roomWidth/2 - I * csWidth + 0.02, roomHeight - 0.002, roomDepth/2>
+        }
+    #end
+    #for (I, 0, nColumns)
+        box {
+            <-roomWidth/2, roomHeight, roomDepth/2 - I * csHeight>,
+            <roomWidth/2, roomHeight - 0.002, roomDepth/2 - I * csHeight + 0.02>
+        }
+    #end
+    texture { Chrome_Metal }
+}
 
 // Floor
-plane {
-    y, -1
-    texture {
-        pigment { checker rgb<0.8, 0.8, 0.8> White }
+union {
+    #local fSize = 0.45;
+    difference {
+        box {
+            <-roomWidth/2, 0, -roomDepth/2>,
+            <roomWidth/2, 0.05, roomDepth/2>
+        }
+
+        // horizontal stripes
+        #for (I, 0, ceil(roomWidth/fSize))
+            box {
+                <roomWidth/2 - I * fSize, 0.06, -roomDepth/2>,
+                <roomWidth/2 - I * fSize + 0.02, 0, roomDepth/2>
+            }
+        #end
+        // vertical stripes
+        #for (I, 0, ceil(roomDepth/fSize))
+            box {
+                <-roomWidth/2, 0.06, roomDepth/2 - I * fSize>,
+                <roomWidth/2, 0, roomDepth/2 - I * fSize + 0.02>
+            }
+        #end
+
+        texture {
+            pigment {
+                rgb<122/255, 113/255, 98/255>
+            }
+        }
+
+        finish {
+            crand 0.1
+        }
     }
+    // horizontal stripes
+    #for (I, 0, ceil(roomWidth/fSize))
+        box {
+            <roomWidth/2 - I * fSize, 0.048, -roomDepth/2>,
+            <roomWidth/2 - I * fSize + 0.02, 0, roomDepth/2>
+            texture { pigment { Black } }
+        }
+    #end
+    // vertical stripes
+    #for (I, 0, ceil(roomDepth/fSize))
+        box {
+            <-roomWidth/2, 0.048, roomDepth/2 - I * fSize>,
+            <roomWidth/2, 0, roomDepth/2 - I * fSize + 0.02>
+            texture { pigment { Black } }
+        }
+    #end
 }
 
 // Window
 union {
-    // Outside world
-    box {
-        <-100, 0, 2 * winBorderRadius>,
-        <100, 2 * (winHeightRow1 + winHeightRow2 + winHeightRow3), 2 * winBorderRadius + 1>
-        texture {
-            pigment { rgb<0, 0.5, 1> }
-        }
-    }
-
     object {
         Window(winWidth, winHeightRow1, winBorderRadius, numWindows)
         translate y * (winHeightRow2 + winHeightRow3)
@@ -82,230 +177,97 @@ union {
     }
 
     pigment { Gray }
-    translate <0, -1, 20 + offsetZ>
+    finish { metallic }
+    translate <winWidth/2, 0, roomDepth/2>
 }
 
-// Ceiling
+// Lamps
+#local x1 = 11.35;
+#local x2 = 13.2;
+#local x3 = 15;
+#local x4 = 17.3;
+
 union {
-    plane {
-        y, cy
-        pigment { Gray }
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 0)
+        translate <x1, 0, 36>
     }
 
-    // Ceiling stripes
-    union {
-        #for (I, 0, numCeilingRows - 1)
-            #for (J, 0, numCeilingColumns - 1)
-                object {
-                    Frame(p1, p2, 0.02, y)
-                    translate <J * ceilingStripeWidth - ceilingStripeOffsetX, 0, I * ceilingStripeHeight - ceilingStripeOffsetZ>
-                }
-            #end
-        #end
-        //rotate y * -10
-        translate <0, cy + 0.28, 16 + offsetZ>
-        texture { Chrome_Metal }
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 1)
+        translate <x1, 0, 34>
     }
 
-    #local x1 = -7;
-    #local x2 = 0;
-    #local x3 = 6;
-    // Lamps
-    union {
-        object {
-            Lamp(lampLength, lampRadius, lampIntensity, 0)
-            translate <x1, 0, 19>
-        }
-
-        object {
-            Lamp(lampLength, lampRadius, lampIntensity, 1)
-            translate <x1, 0, 17>
-        }
-
-        object {
-            Lamp(lampLength, lampRadius, lampIntensity, 1)
-            translate <x1, 0, 15>
-        }
-
-        object {
-            Lamp(lampLength, lampRadius, lampIntensity, 1)
-            translate <x1, 0, 13>
-        }
-
-        object {
-            Lamp(lampLength, lampRadius, lampIntensity, 0)
-            translate <x2, 0, 19>
-        }
-
-        object {
-            Lamp(lampLength, lampRadius, lampIntensity, 1)
-            translate <x2, 0, 17>
-        }
-
-        object {
-            Lamp(lampLength, lampRadius, lampIntensity, 0)
-            translate <x2, 0, 15>
-        }
-
-        object {
-            Lamp(lampLength, lampRadius, lampIntensity, 1)
-            translate <x2, 0, 13>
-        }
-
-        object {
-            Lamp(lampLength, lampRadius, lampIntensity, 0)
-            translate <x3, 0, 19>
-        }
-
-        object {
-            Lamp(lampLength, lampRadius, lampIntensity, 1)
-            translate <x3, 0, 17>
-        }
-
-        object {
-            Lamp(lampLength, lampRadius, lampIntensity, 1)
-            translate <x3, 0, 15>
-        }
-
-        object {
-            Lamp(lampLength, lampRadius, lampIntensity, 1)
-            translate <x3, 0, 13>
-        }
-        translate <0, cy - lampRadius - 0.1, offsetZ>
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 1)
+        translate <x1, 0, 31.5>
     }
-}
 
-// Chairs
-object {
-    Chair
-    scale chairScaling
-    rotate y * 50
-    translate <-4, -1, 8 + offsetZ>
-}
-
-object {
-    Chair
-    scale chairScaling
-    rotate y * -120
-    translate <-3.5, -1, 5 + offsetZ>
-}
-
-object {
-    Chair
-    scale chairScaling
-    rotate y * 150
-    translate <-2.5, -1, 5 + offsetZ>
-}
-
-object {
-    Chair
-    scale chairScaling
-    rotate y * -30
-    translate <-3.2, -1, 6 + offsetZ>
-}
-
-object {
-    Chair
-    scale chairScaling
-    rotate y * 60
-    translate <-2.6, -1, 5.7 + offsetZ>
-}
-
-object {
-    Chair
-    scale chairScaling
-    rotate y * 180
-    translate <0.2, -1, 9 + offsetZ>
-}
-
-object {
-    Chair
-    scale chairScaling
-    rotate y * 170
-    translate <1.2, -1, 9 + offsetZ>
-}
-
-object {
-    Chair
-    scale chairScaling
-    rotate y * 80
-    translate <4, -1, 11 + offsetZ>
-}
-
-object {
-    Chair
-    scale chairScaling
-    rotate y * 80
-    translate <4, -1, 10 + offsetZ>
-}
-
-// Tables
-object {
-    RoundTable(0.8, 0.6, 0.05)
-    pigment { White }
-    rotate y * 10
-    scale 1.2
-    translate <-3, -0.46, 5 + offsetZ>
-}
-
-object {
-    SquareTable(2, 0.5, 0.06, 1)
-    pigment { White }
-    translate <0.5, -1, 9.5 + offsetZ>
-}
-
-// Sign
-object {
-    Sign
-    rotate y * -15
-    scale 0.8
-    translate <-3, 0.02, 5 + offsetZ>
-}
-
-// Trash Cans
-object {
-    TrashCan(0.8, 0.4, 0.3, 0.035, 0.02, 35, 4)
-    pigment { Orange }
-    scale 0.7
-    translate <-5, -1, 8.5 + offsetZ>
-}
-
-object {
-    TrashCan(0.8, 0.5, 0.4, 0.035, 0.02, 35, 10)
-    pigment { Yellow }
-    scale 0.5
-    translate <2, -1, 9 + offsetZ>
-}
-
-// Monitors
-object {
-    Monitor(0.8, 0.5, 0.05, 0.8, 0.02, 0.5, 0.5, 0.04)
-    rotate y * 60
-    scale 1.5
-    translate <-7.5, 0, 10 + offsetZ>
-}
-
-object {
-    Monitor(0.8, 0.5, 0.05, 0.8, 0.02, 0.5, 0.5, 0.04)
-    rotate y * 90
-    scale 1.5
-    translate <1.2, 0, 11 + offsetZ>
-}
-
-// Mobile on Wheels
-object {
-    MobileOnWheels(1, 1.6, 1.2, 0.1, 0.05, 0.05)
-    rotate y * 80
-    //rotate x * 90
-    translate <6, -1, 12 + offsetZ>
-}
-
-// Vases
-object {
-    FatVase(0.8, 0.5, 0.3)
-    texture {
-        pigment { DarkBrown }
-        finish { phong 1 }
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 1)
+        translate <x1, 0, 29.7>
     }
-    translate <-4, -1, 12 + offsetZ>
+
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 1)
+        translate <x1, 0, 27>
+    }
+
+
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 0)
+        translate <x2, 0, 36>
+    }
+
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 1)
+        translate <x2, 0, 31.5>
+    }
+
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 0)
+        translate <x2, 0, 29.7>
+    }
+
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 1)
+        translate <x2, 0, 27>
+    }
+
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 1)
+        translate <x2, 0, 25.2>
+    }
+
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 0)
+        translate <x3, 0, 36>
+    }
+
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 1)
+        translate <x3, 0, 33.75>
+    }
+
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 1)
+        translate <x3, 0, 31.3>
+    }
+
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 1)
+        translate <x3, 0, 29.5>
+    }
+
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 0)
+        translate <x4, 0, 36>
+    }
+
+    object {
+        Lamp(lampLength, lampRadius, lampIntensity, 1)
+        translate <x4, 0, 33.75>
+    }
+
+    translate <0, roomHeight - lampRadius - 0.05, 0>
 }
