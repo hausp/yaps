@@ -87,7 +87,7 @@
             [1 P_Chair2]
         }
     }
-    finish {ambient 0 diffuse 1}
+    finish {ambient 0.2 diffuse 1}
 }
 
 #declare T_LegChair = texture {
@@ -100,7 +100,7 @@
             [1 C_PChair2]
         }
     }
-    finish {ambient 0 diffuse 0.6 specular 1 roughness 1/10 reflection {0.1,0.8 metallic}}
+    finish {ambient 0.2 diffuse 0.6 specular 1 roughness 1/10 reflection {0.1,0.8 metallic}}
     scale 0.1
 }
 
@@ -155,7 +155,7 @@
         plane {y,0 rotate x*25}
         translate -y*rCh4
     }
-    texture {pigment {P_Chair1} finish {ambient 0 diffuse 1}}
+    texture {pigment {P_Chair1} finish {ambient 0.2 diffuse 1}}
 } 
 
 #declare Chair = union {
@@ -171,7 +171,7 @@
                 union {
                     sphere {0,1 translate y scale <1,0.5,1> scale 0.01 translate y*rCh-x*0.6*xCh/2}
                     sphere {0,1 translate y scale <1,0.5,1> scale 0.01 translate y*rCh+x*0.6*xCh/2}
-                    texture {pigment {White*0.6}finish {ambient 0 diffuse 1 specular 1 roughness 0.001 reflection 0.1}}
+                    texture {pigment {White*0.6}finish {ambient 0.2 diffuse 1 specular 1 roughness 0.001 reflection 0.1}}
                     rotate x*aCh
                 }
                 translate y*yCh3
@@ -228,7 +228,7 @@
         texture {
             pigment { checker rgb<0.3, 0.3, 0.3> White }
             /*finish {
-                ambient 0
+                ambient 0.2
                 diffuse 1
             }*/
         }

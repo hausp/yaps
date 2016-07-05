@@ -7,6 +7,7 @@ global_settings {
 
 #include "Chair.pov"
 #include "FatVase.pov"
+#include "Lamp.pov"
 #include "MobileOnWheels.pov"
 #include "Monitor.pov"
 #include "ReservedTableSign.pov"
@@ -23,6 +24,18 @@ global_settings {
 #local numWindows = 12;
 #local chairScaling = 1.5;
 #local offsetZ = -100;
+#local numCeilingRows = 15;
+#local numCeilingColumns = 9;
+#local ceilingStripeWidth = 3.5;
+#local ceilingStripeHeight = 1;
+#local ceilingStripeOffsetX = numCeilingColumns * ceilingStripeWidth / 2;
+#local ceilingStripeOffsetZ = numCeilingRows * ceilingStripeHeight / 2;
+#local p1 = <-ceilingStripeWidth/2, -0.3, -ceilingStripeHeight/2>;
+#local p2 = -p1;
+#local cy = winHeightRow2 + winHeightRow3;
+#local lampRadius = 0.07;
+#local lampLength = 1.6;
+#local lampIntensity = 0.15;
 
 camera {
     //location <0, 1, -1.5>
@@ -33,7 +46,7 @@ camera {
 
 background { White * 0.5 }
 
-light_source { <-3, 4, 4 + offsetZ> color White }
+//light_source { <-3, 4, 4 + offsetZ> color White }
 
 // Floor
 plane {
@@ -74,20 +87,12 @@ union {
 
 // Ceiling
 union {
-    #local numCeilingRows = 15;
-    #local numCeilingColumns = 9;
-    #local ceilingStripeWidth = 3.5;
-    #local ceilingStripeHeight = 1;
-    #local ceilingStripeOffsetX = numCeilingColumns * ceilingStripeWidth / 2;
-    #local ceilingStripeOffsetZ = numCeilingRows * ceilingStripeHeight / 2;
-    #local p1 = <-ceilingStripeWidth/2, -0.3, -ceilingStripeHeight/2>;
-    #local p2 = -p1;
-    #local cy = winHeightRow2 + winHeightRow3;
     plane {
         y, cy
         pigment { Gray }
     }
 
+    // Ceiling stripes
     union {
         #for (I, 0, numCeilingRows - 1)
             #for (J, 0, numCeilingColumns - 1)
@@ -100,6 +105,73 @@ union {
         //rotate y * -10
         translate <0, cy + 0.28, 16 + offsetZ>
         texture { Chrome_Metal }
+    }
+
+    #local x1 = -7;
+    #local x2 = 0;
+    #local x3 = 6;
+    // Lamps
+    union {
+        object {
+            Lamp(lampLength, lampRadius, lampIntensity, 0)
+            translate <x1, 0, 19>
+        }
+
+        object {
+            Lamp(lampLength, lampRadius, lampIntensity, 1)
+            translate <x1, 0, 17>
+        }
+
+        object {
+            Lamp(lampLength, lampRadius, lampIntensity, 1)
+            translate <x1, 0, 15>
+        }
+
+        object {
+            Lamp(lampLength, lampRadius, lampIntensity, 1)
+            translate <x1, 0, 13>
+        }
+
+        object {
+            Lamp(lampLength, lampRadius, lampIntensity, 0)
+            translate <x2, 0, 19>
+        }
+
+        object {
+            Lamp(lampLength, lampRadius, lampIntensity, 1)
+            translate <x2, 0, 17>
+        }
+
+        object {
+            Lamp(lampLength, lampRadius, lampIntensity, 0)
+            translate <x2, 0, 15>
+        }
+
+        object {
+            Lamp(lampLength, lampRadius, lampIntensity, 1)
+            translate <x2, 0, 13>
+        }
+
+        object {
+            Lamp(lampLength, lampRadius, lampIntensity, 0)
+            translate <x3, 0, 19>
+        }
+
+        object {
+            Lamp(lampLength, lampRadius, lampIntensity, 1)
+            translate <x3, 0, 17>
+        }
+
+        object {
+            Lamp(lampLength, lampRadius, lampIntensity, 1)
+            translate <x3, 0, 15>
+        }
+
+        object {
+            Lamp(lampLength, lampRadius, lampIntensity, 1)
+            translate <x3, 0, 13>
+        }
+        translate <0, cy - lampRadius - 0.1, offsetZ>
     }
 }
 

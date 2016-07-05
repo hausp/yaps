@@ -1,9 +1,10 @@
 #version 3.7;
 
 #include "colors.inc"
+#include "textures.inc"
 #include "shapes.inc"
 
-#local debugMode = 1;
+#local debugMode = 0;
 #if (debugMode)
     global_settings {
         assumed_gamma 1
@@ -14,33 +15,96 @@
 // Lamp
 // ----------------------------------------
 
-#macro Lamp(length, lampRadius, status)
+#macro Lamp(length, lampRadius, intensity, status)
     #local gap = 0.02;
+    #local totalWidth = 2 * lampRadius + gap;
+    #local bodyHeight = 0.06;
+    #local thick = 0.002;
+    #local Sheet = union {
+        difference {
+            cylinder {
+                <0, 0, -length/2>,
+                <0, 0, length/2>,
+                lampRadius
+            }
+
+            union {
+                cylinder {
+                    <0, 0, -length/2 - 0.01>,
+                    <0, 0, length/2 + 0.01>,
+                    lampRadius - thick
+                }
+
+                box {
+                    <-lampRadius, -lampRadius, -length/2 - 0.01>,
+                    <lampRadius, 0, length/2 + 0.01>
+                }
+
+                box {
+                    <0, 0, -length/2 - 0.01>,
+                    <lampRadius, lampRadius, length/2 + 0.01>
+                }
+            }
+            pigment { Gray }
+            finish {
+                reflection 0.5
+            }
+        }
+    }
     #local LampBody = union {
-        cylinder {
-            <-lampRadius - gap/2, 0, -length/2>,
-            <-lampRadius - gap/2, 0, length/2>,
-            lampRadius
-        }
+        union {
+            cylinder {
+                <-totalWidth/2, 0, -length/2>,
+                <-totalWidth/2, 0, length/2>,
+                lampRadius
+            }
 
-        cylinder {
-            <lampRadius + gap/2, 0, -length/2>,
-            <lampRadius + gap/2, 0, length/2>,
-            lampRadius
-        }
+            cylinder {
+                <totalWidth/2, 0, -length/2>,
+                <totalWidth/2, 0, length/2>,
+                lampRadius
+            }
+        
+            pigment { White }
 
-        pigment { White }
-
-        finish {
             #if (status)
+            finish {
                 ambient 1
+            }
             #end
+        }
+
+        prism {
+            linear_sweep
+            linear_spline
+            -length/2,
+            length/2,
+            5,
+            <-totalWidth/2 - lampRadius, -bodyHeight/2>,
+            <totalWidth/2 + lampRadius, -bodyHeight/2>,
+            <totalWidth/3, bodyHeight/2>,
+            <-totalWidth/3, bodyHeight/2>,
+            <-totalWidth/2 - lampRadius, -bodyHeight/2>
+            rotate <90, 0, 180>
+            translate <0, lampRadius + bodyHeight/2, 0>
+            pigment { Gray }
+        }
+
+        object {
+            Sheet
+            translate <-3 * lampRadius + 0.02, 0, 0>
+        }
+
+        object {
+            Sheet
+            rotate z * -90
+            translate <3 * lampRadius - 0.02, 0, 0>
         }
     }
 
     #if (status)
         light_source {
-            <0, 0, 0> color White
+            <0, 0, 0> color White * intensity
             looks_like { LampBody }
         }
     #else
@@ -54,7 +118,7 @@
 
 #if (debugMode)
     camera {
-      location <0, 1, -1.5>
+      location <0, 0.7, -1.5>
       look_at <0, 0, 1>
     }
 
@@ -70,19 +134,20 @@
     }
 
     object {
-        Lamp(0.7, 0.04, 1)
+        Lamp(0.7, 0.03, 1, 1)
         //rotate y * 90
         translate <-0.5, 0.7, 0>
     }
 
     object {
-        Lamp(0.7, 0.04, 0)
+        Lamp(0.7, 0.03, 1, 1)
         //rotate y * 90
+        //rotate y * 20
         translate <0, 0.7, 0>
     }
 
     object {
-        Lamp(0.7, 0.04, 1)
+        Lamp(0.7, 0.03, 1, 1)
         //rotate y * 90
         translate <0.5, 0.7, 0>
     }
