@@ -19,24 +19,24 @@ global_settings {
 #include "Window.pov"
 
 
-#declare roomHeight = 3.10;
-#declare roomWidth = 70;
+#declare roomHeight = 3.0;
+#declare roomWidth = 75;
 #declare roomDepth = 75;
 
-#declare Camera_Location = <8.66, 1.4, roomDepth/2 - 18.5>;
-#declare Camera_Look_At  = <14.46, 2.25, roomDepth/2>;
+#declare Camera_Location = <9.7, 1.6, roomDepth/2 - 17.8>;
+#declare Camera_Look_At  = <14.7, 2, roomDepth/2>;
 #declare Camera_Angle    =  30;
 
-#local winHeightRow1 = 0.60;
-#local winHeightRow2 = 1.53;
-#local winHeightRow3 = 1.30;
+#local winHeightRow1 = 0.6;
+#local winHeightRow2 = 1.8;
+#local winHeightRow3 = 0.8;
 #local winBorderRadius = 0.07;
-#local winWidth = 1;
-#local numWindows = (roomWidth + 2 * winBorderRadius) / winWidth;
+#local winWidth = 0.95;
+#local numWindows = roomWidth / winWidth;
 #local lampRadius = 0.03;
 #local lampLength = 1;
 #local lampIntensity = 0.15;
-#local tableHeight = 0.8;
+#local tableHeight = 0.65;
 
 /*
 #declare Cam_V = Camera_Look_At - Camera_Location;
@@ -56,7 +56,6 @@ camera {
     right x*image_width/image_height
     look_at Camera_Look_At
     angle Camera_Angle
-    //rotate -1 * z
 }
 
 background { rgb<135/255, 206/255, 250/255> }
@@ -70,8 +69,8 @@ light_source {
 difference {
     // outer box
     box {
-        <-(roomWidth/2 + 0.10), -0.10, -(roomDepth/2 - 0.10)>,
-        <(roomWidth/2 + 0.10), roomHeight + 0.10, (roomDepth/2 + 0.05)>
+        <-(roomWidth/2 + 0.5), -0.5, -(roomDepth/2 + 0.5)>,
+        <(roomWidth/2 + 0.5), roomHeight + 0.5, (roomDepth/2 + 0.5)>
     }
     // inner box
     box {
@@ -89,7 +88,7 @@ difference {
 
 // Ceiling
 union {
-    #local csWidth = 1.20;
+    #local csWidth = 1;
     #local csHeight = 0.7;
     #local nRows = ceil(roomWidth/csWidth);
     #local nColumns = ceil(roomDepth/csHeight);
@@ -179,12 +178,12 @@ union {
 
     pigment { Gray }
     finish { metallic }
-    translate <0, 0, roomDepth/2 + 0.15 - winBorderRadius>
+    translate <winWidth/2, 0, roomDepth/2>
 }
 
 // Lamps
-#local x1 = 10.85;
-#local x2 = 13.00;
+#local x1 = 11.35;
+#local x2 = 13.2;
 #local x3 = 15;
 #local x4 = 17.8;
 union {
@@ -200,17 +199,17 @@ union {
 
     object {
         Lamp(lampLength, lampRadius, lampIntensity, 1)
-        translate <x1, 0, 32>
+        translate <x1, 0, 31.5>
     }
 
     object {
         Lamp(lampLength, lampRadius, lampIntensity, 1)
-        translate <x1, 0, 30>
+        translate <x1, 0, 29.7>
     }
 
     object {
         Lamp(lampLength, lampRadius, lampIntensity, 1)
-        translate <x1, 0, 27.5>
+        translate <x1, 0, 27>
     }
 
 
@@ -221,22 +220,22 @@ union {
 
     object {
         Lamp(lampLength, lampRadius, lampIntensity, 1)
-        translate <x2, 0, 32>
+        translate <x2, 0, 31.5>
     }
 
     object {
         Lamp(lampLength, lampRadius, lampIntensity, 0)
-        translate <x2, 0, 30>
+        translate <x2, 0, 29.7>
     }
 
     object {
         Lamp(lampLength, lampRadius, lampIntensity, 1)
-        translate <x2, 0, 27.5>
+        translate <x2, 0, 27>
     }
 
     object {
         Lamp(lampLength, lampRadius, lampIntensity, 1)
-        translate <x2, 0, 25.35>
+        translate <x2, 0, 25.2>
     }
 
     object {
@@ -246,17 +245,17 @@ union {
 
     object {
         Lamp(lampLength, lampRadius, lampIntensity, 1)
-        translate <x3, 0, 34>
+        translate <x3, 0, 33.75>
     }
 
     object {
         Lamp(lampLength, lampRadius, lampIntensity, 1)
-        translate <x3, 0, 31.6>
+        translate <x3, 0, 31.3>
     }
 
     object {
         Lamp(lampLength, lampRadius, lampIntensity, 1)
-        translate <x3, 0, 29.6>
+        translate <x3, 0, 29.5>
     }
 
     object {
@@ -276,65 +275,56 @@ union {
 union {
     object {
         Chair
-        rotate y * 75
-        scale 1.06
-        translate <12.03, 0.048, 29.8>
+        rotate y * 50
+        translate <11.9, 0, 31.8>
     }
 
     object {
         Chair
-        rotate y * -105
-        scale 1.06
-        translate <11.23, 0.048, 29.7>
-    }
-
-    object {
-        Chair
-        rotate y * 160
-        scale 1.06
-        translate <11.9, 0.048, 29.3>
-    }
-
-    object {
-        Chair
-        rotate y * -30
-        scale 1.06
-        translate <11.57, 0.048, 30>
-    }
-
-    object {
-        Chair
-        rotate y * 30
-        scale 1.06
-        translate <12.6, 0.048, 35.5>
-    }
-
-    object {
-        Chair
-        rotate y * 200
-        scale 1.06
-        translate <10.1, 0.048, 33.55>
+        rotate y * -110
+        translate <11.7, 0, 30>
     }
 
     object {
         Chair
         rotate y * 150
-        scale 1.06
-        translate <10.66, 0.048, 33.55>
+        translate <12.3, 0, 29.7>
     }
 
     object {
         Chair
-        rotate y * 90
-        scale 1.06
-        translate <16.25, 0.048, 34.1>
+        rotate y * -30
+        translate <12, 0, 30.4>
     }
 
     object {
         Chair
-        rotate y * 90
-        scale 1.06
-        translate <16.40, 0.048, 33.45>
+        rotate y * 75
+        translate <12.6, 0, 30.4>
+    }
+
+    object {
+        Chair
+        rotate y * 180
+        translate <13.7, 0, 31.5>
+    }
+
+    object {
+        Chair
+        rotate y * 170
+        translate <14.3, 0, 31.5>
+    }
+
+    object {
+        Chair
+        rotate y * 85
+        translate <15.8, 0, 32.4>
+    }
+
+    object {
+        Chair
+        rotate y * 85
+        translate <16, 0, 32>
     }
 }
 
@@ -343,64 +333,22 @@ object {
     Sign
     rotate y * -20
     scale 0.6
-    translate <11.67, 0.05 + tableHeight, 30>
+    translate <12.1, 0.1 + tableHeight, 30>
 }
 
-// Center Table
+// Tables
 object {
-    RoundTable(tableHeight, 0.6, 0.04)
+    RoundTable(tableHeight, 0.6, 0.05)
     pigment { White }
-    rotate y * 5
-    translate <11.72, 0.05, 29.7>
-}
-
-// Right Tables
-object {
-    SquareTable(1.5, 0.6, 0.02, tableHeight)
-    pigment { White }
-    translate <14.20, 0.05, 32.7>
+    rotate y * 10
+    translate <12.15, 0.1 + tableHeight/2, 30>
 }
 
 object {
-    SquareTable(1.5, 0.6, 0.02, tableHeight)
+    SquareTable(1.1, 0.5, 0.06, tableHeight)
     pigment { White }
-    rotate -90 * y
-    translate <15.25, 0.05, 33.75>
-}
-
-object {
-    SquareTable(1.5, 0.6, 0.02, tableHeight)
-    pigment { White }
-    rotate 90 * y
-    translate <16.15, 0.05, 33.75>
-}
-
-// Left Tables
-object {
-    SquareTable(1.5, 0.6, 0.02, tableHeight)
-    pigment { White }
-    rotate -90 * y
-    translate <9.5, 0.05, 35.25>
-}
-
-object {
-    SquareTable(1.2, 0.6, 0.02, tableHeight)
-    pigment { White }
-    translate <10.2, 0.05, 34.00>
-}
-
-object {
-    SquareTable(1.5, 0.6, 0.02, tableHeight)
-    pigment { White }
-    rotate -90 * y
-    translate <11.1, 0.05, 35.25>
-}
-
-object {
-    RoundTable(tableHeight, 0.5, 0.02)
-    pigment { White }
-    //rotate y * 10
-    translate <11.9, 0.05, 35.25>
+    //translate <14.05, 0.05, 32>
+    translate <11.9, 0.05, 30>
 }
 
 // Trash Cans
@@ -408,14 +356,14 @@ object {
     TrashCan(0.8, 0.4, 0.3, 0.035, 0.02, 35, 4)
     pigment { Orange }
     scale 0.4
-    translate <11.7, 0.05, 34.80>
+    translate <11.7, 0.05, 33>
 }
 
 object {
     TrashCan(0.8, 0.4, 0.3, 0.035, 0.02, 35, 10)
     pigment { Yellow }
     scale 0.3
-    translate <15.20, 0.05, 32.7>
+    translate <14.7, 0.05, 31.4>
 }
 
 // Monitors
@@ -435,23 +383,17 @@ object {
 
 // Mobile on Wheels
 object {
-    MobileOnWheels(0.7, 0.9, 0.6, 0.08, 0.05, 0.05)
+    MobileOnWheels(0.5, 0.9, 0.6, 0.08, 0.05, 0.05)
     rotate y * 80
-    translate <18.5, 0.05, 36.8>
+    translate <17.4, 0.05, 34>
 }
 
 // Vases
 object {
-    FatVase(0.36, 0.23, 0.1)
+    FatVase(0.3, 0.15, 0.1)
     texture {
         pigment { DarkBrown }
         finish { phong 1 }
     }
-    translate <13.12, 0, 37>
-}
-
-object {
-    FatVase(0.45, 0.23, 0.1)
-    pigment { Green }
-    translate <12.13, 0, 34.85>
+    translate <12.2, 0, 33.4>
 }
