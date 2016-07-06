@@ -42,10 +42,10 @@
     #local halfL = length / 2;
     #local heightHole1 = height * 0.25;
     #local heightHole2 = height * 0.35;
-    #local minorRadius = 0.03;
-    #local majorRadius = 0.1;
+    #local minorRadius = 0.02;
+    #local majorRadius = 0.06;
     #local totalRadius = minorRadius + majorRadius;
-    #local experimentalConst1 = -0.45;
+    #local experimentalConst1 = -0.12;
     #local barLength = length - 2 * border + experimentalConst1;
     #local Wheel = cylinder {
         <0, -wheelThickness/2, 0>,
@@ -58,25 +58,24 @@
         union {
             object {
                 FourthOfATorus(minorRadius, majorRadius)
-                translate <-barLength + totalRadius, minorRadius, -majorRadius>
-                //translate <minorRadius, minorRadius, -majorRadius>
+                translate <-barLength + totalRadius, 0, -majorRadius>
             }
 
             cylinder {
                 <-barLength + totalRadius, 0, 0>,
                 <barLength - totalRadius, 0, 0>,
                 minorRadius
-                translate <0, minorRadius, 0>
             }
 
             object {
                 FourthOfATorus(minorRadius, majorRadius)
                 rotate y * 90
-                translate <barLength - totalRadius - 0.01, minorRadius, -majorRadius>
+                translate <barLength - totalRadius - 0.01, 0, -majorRadius>
             }
 
             rotate y * 90
-            translate <halfW + totalRadius, 2 * wheelRadius + height - 2 * border, 0>
+            //rotate z * 90
+            translate <halfW + totalRadius, minorRadius + 2 * wheelRadius + height - border, 0>
             //pigment { Gray }
             texture {
                 Chrome_Metal
@@ -145,8 +144,9 @@
 
 #if (debugMode)
     camera {
-      location <0, 1, -2.5>
-      look_at <0, 0, 1>
+      //location <0, 1, -2.5>
+      location <17, 1.2, 32>
+      look_at <17, 1, 33>
     }
 
     background { White * 0.5 }
@@ -160,11 +160,17 @@
         }
     }
 
-    object {
+    /*object {
         MobileOnWheels(1, 1.6, 1.2, 0.1, 0.05, 0.05)
         rotate y * 45
         //rotate x * 90
         translate <0, -1, 1>
+    }*/
+
+    object {
+        MobileOnWheels(0.5, 0.9, 0.6, 0.08, 0.05, 0.05)
+        rotate y * 90
+        translate <17.2, 0.05, 34>
     }
 
 #end
