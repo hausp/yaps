@@ -56,14 +56,20 @@ camera {
     right x*image_width/image_height
     look_at Camera_Look_At
     angle Camera_Angle
-    //rotate -1 * z
 }
 
-background { rgb<135/255, 206/255, 250/255> }
+background { rgb<135/255, 206/255, 250/255>
+    //Blue
+}
 
 light_source {
-    <13, roomHeight + 1, roomDepth/2>
-    color White
+    <15, roomHeight + 50, roomDepth/2 + 50>
+    color White * 0.20
+    looks_like {
+        sphere {
+            <0,0,0>, 20
+        }
+    }
 }
 
 // Room
@@ -422,15 +428,15 @@ object {
 object {
     Monitor(0.8, 0.5, 0.05, 0.8, 0.02, 0.5, 0.3, 0.04)
     rotate y * 90
-    //scale 1.5
-    translate <10.2, 0.05 + tableHeight, 32>
+    scale 0.666
+    translate <9.5, 0.05 + tableHeight, 35.25>
 }
 
 object {
     Monitor(0.8, 0.5, 0.05, 0.8, 0.02, 0.5, 0.3, 0.04)
     rotate y * 90
-    //scale 1.5
-    translate <14.5, 0.05 + tableHeight, 33>
+    scale 0.666
+    translate <15.25, 0.05  + tableHeight, 33.75>
 }
 
 // Mobile on Wheels
