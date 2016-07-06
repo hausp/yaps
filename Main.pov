@@ -467,6 +467,13 @@ object {
 
 object {
     Monitor(0.8, 0.5, 0.05, 0.8, 0.02, 0.5, 0.3, 0.04)
+    rotate y * 180
+    scale 0.666
+    translate <11.1, 0.05 + tableHeight, 35.25>
+}
+
+object {
+    Monitor(0.8, 0.5, 0.05, 0.8, 0.02, 0.5, 0.3, 0.04)
     rotate y * 90
     scale 0.666
     translate <15.25, 0.05  + tableHeight, 33.75>
