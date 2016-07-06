@@ -4,7 +4,7 @@
 #include "shapes.inc"
 #include "Utils.pov"
 
-#local debugMode = 1;
+#local debugMode = 0;
 #if (debugMode)
     global_settings {
         assumed_gamma 1
@@ -159,7 +159,7 @@
     #local h = 2;
     union {
         object {
-            Couch(2.7, h, 1.1, 0.5, 0.17, h/2, 0.3, 0.6)
+            Couch(2.4, h, 1.1, 0.4, 0.17, h/2, 0.3, 0.6)
             rotate y * 20
         }
 

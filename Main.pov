@@ -8,6 +8,7 @@ global_settings {
 #include "transforms.inc"
 
 #include "Chair.pov"
+#include "Couch.pov"
 #include "FatVase.pov"
 #include "FlyingFourthOfATable.pov"
 #include "Lamp.pov"
@@ -490,3 +491,17 @@ object {
     pigment { Green }
     translate <12.13, 0, 34.85>
 }
+
+// Couch
+object {
+    //Couch(0.5, 2, 1.1, 0.5, 0.17, 1, 0.3, 0.6)
+    Couch(2.3, 2, 1.1, 0.5, 0.17, 1, 0.3, 0.6)
+    scale 0.5
+    translate <14.2, 0, 37>
+}
+
+// Ghost Table
+/*object {
+    GhostTable(1.5, 0.7, 0.03, 0.8, 0.06)
+    rotate y * -30
+}*/
