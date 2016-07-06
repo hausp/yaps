@@ -491,7 +491,7 @@ object {
 
 object {
     FatVase(0.45, 0.23, 0.1)
-    pigment { Green }
+    pigment { rgb<0, 0.15, 0> }
     translate <12.13, 0.05, 34.85>
 }
 
