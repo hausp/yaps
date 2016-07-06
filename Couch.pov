@@ -19,8 +19,6 @@
     #local totalWidth = cWidth + 2 * supThickness;
     #local totalSupRadius = supRadius + supThickness/2;
     #local backRadius = 0.07;
-    #local feetWidth = cWidth / 12;
-    #local feetThickness = cLength / 8;
     #local halfTorus = difference {
         torus {
             supRadius, supThickness/2
@@ -94,13 +92,8 @@
         }
 
         box {
-            <-totalWidth/2 + feetWidth, 0, -cLength/2 - 0.01>,
-            <totalWidth/2 - feetWidth, seatHeight - seatThickness, cLength/2 + 0.01>
-        }
-
-        box {
-            <-totalWidth/2 - 0.01, 0, -cLength/2 + feetThickness>,
-            <totalWidth/2 + 0.01, seatHeight - seatThickness, cLength/2 - feetThickness>
+            <-totalWidth/2 - 0.01, 0, -cLength/2 - 0.01>,
+            <totalWidth/2 + 0.01, seatHeight - seatThickness, cLength/2 + 0.01>
         }
 
         pigment { rgb<0, 0, 0.1> }
