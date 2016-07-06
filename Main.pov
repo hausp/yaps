@@ -104,16 +104,16 @@ union {
     #for (I, 0, nRows)
         box {
             <roomWidth/2 - I * csWidth, roomHeight, -roomDepth/2>,
-            <roomWidth/2 - I * csWidth + 0.02, roomHeight - 0.002, roomDepth/2>
+            <roomWidth/2 - I * csWidth + 0.02, roomHeight - 0.0001, roomDepth/2>
         }
     #end
     #for (I, 0, nColumns)
         box {
             <-roomWidth/2, roomHeight, roomDepth/2 - I * csHeight>,
-            <roomWidth/2, roomHeight - 0.002, roomDepth/2 - I * csHeight + 0.02>
+            <roomWidth/2, roomHeight - 0.0001, roomDepth/2 - I * csHeight + 0.02>
         }
     #end
-    texture { Chrome_Metal }
+    texture { Aluminum }
 }
 
 // Floor
