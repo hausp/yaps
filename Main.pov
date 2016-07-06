@@ -347,7 +347,8 @@ object {
 object {
     SquareTable(1.1, 0.5, 0.06, tableHeight)
     pigment { White }
-    translate <14.05, 0.05, 32>
+    //translate <14.05, 0.05, 32>
+    translate <11.9, 0.05, 30>
 }
 
 // Trash Cans
