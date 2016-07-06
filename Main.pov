@@ -9,6 +9,7 @@ global_settings {
 
 #include "Chair.pov"
 #include "FatVase.pov"
+#include "FlyingFourthOfATable.pov"
 #include "Lamp.pov"
 #include "MobileOnWheels.pov"
 #include "Monitor.pov"
@@ -349,7 +350,7 @@ object {
     Sign
     rotate y * -20
     scale 0.6
-    translate <11.67, 0.05 + tableHeight, 30>
+    translate <11.67, 0.05 + tableHeight, 29.7>
 }
 
 // Center Table

@@ -39,7 +39,7 @@
 
     // Body
     box {
-        <contentLowerX - 0.01, diameter, 0>,
+        <contentLowerX - 0.005, diameter, 0>,
         <contentUpperX, signHeight - diameter, 0>
         pigment { Orange }
     }
@@ -47,7 +47,7 @@
     // Support
     box {
         <lowerX, 0, 0>,
-        <upperX, 0, 0.2>
+        <upperX, 0.01, 0.15>
     }
 
     // Header

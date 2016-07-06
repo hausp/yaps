@@ -1,8 +1,6 @@
 #version 3.7;
 
 #include "colors.inc"
-#include "textures.inc"
-#include "finish.inc"
 #include "Utils.pov"
 
 #local debugMode = 0;
