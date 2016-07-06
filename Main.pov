@@ -353,6 +353,20 @@ object {
     translate <11.67, 0.05 + tableHeight, 29.7>
 }
 
+// Right fourth of a table
+object {
+    FlyingFourthOfATable(tableHeight, 0.615, 0.02)
+    pigment { White }
+    translate <14.9415, 0.0501, 33.0015>
+}
+
+// Left fourth of a table
+object {
+    FlyingFourthOfATable(tableHeight, 0.615, 0.02)
+    pigment { White }
+    translate <10.797, 0.0501, 34.305>
+}
+
 // Center Table
 object {
     RoundTable(tableHeight, 0.6, 0.04)
@@ -373,7 +387,7 @@ object {
     pigment { White }
     rotate -90 * y
     translate <15.25, 0.05, 33.75>
-}
+}    
 
 object {
     SquareTable(1.5, 0.6, 0.02, tableHeight)
@@ -400,14 +414,14 @@ object {
     SquareTable(1.5, 0.6, 0.02, tableHeight)
     pigment { White }
     rotate -90 * y
-    translate <11.1, 0.05, 35.25>
+    translate <11.102, 0.05, 35.05>
 }
 
 object {
     RoundTable(tableHeight, 0.5, 0.02)
     pigment { White }
     //rotate y * 10
-    translate <11.9, 0.05, 35.25>
+    translate <11.91, 0.05, 35.25>
 }
 
 // Trash Cans
