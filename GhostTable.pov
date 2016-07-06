@@ -15,16 +15,64 @@
 // ----------------------------------------
 // GhostTable
 // ----------------------------------------
-#macro GhostTable(tWidth, tHeight, tThickness, absHeight)
+#macro GhostTable(tWidth, tHeight, tThickness, absHeight, baseRadius)
     #local yTop = absHeight - tThickness;
     #local sOffset = 0.001 * tWidth;
     #local spThickness = 0.05 * absHeight;
-    union {
-        RoundedSquare(tWidth - 2*sOffset, tHeight, tThickness)
-        translate <0, yTop, 0>
+    #local border = 0.1;
+    #local padding = (tHeight - border)/2;
+    #local barHeight = absHeight / 10;
+    #local barThickness = 0.05;
+    #local baseCylinder = cylinder {
+        <0, 0, 0>,
+        <0, yTop, 0>,
+        baseRadius
+    }
 
-        //cylinder {
-            //<0, >
+    union {
+        object {
+            RoundedSquare(tWidth - 2 * sOffset, tHeight, tThickness)
+            translate <0, yTop, 0>
+            pigment { White } 
+        }
+
+        union {
+            object {
+                baseCylinder
+                translate <-tWidth/2 + border, 0, padding>
+            }
+
+            object {
+                baseCylinder
+                translate <tWidth/2 - border - baseRadius, 0, padding>
+            }
+
+            object {
+                baseCylinder
+                translate <-tWidth/2 + border, 0, -padding>
+            }
+
+            object {
+                baseCylinder
+                translate <tWidth/2 - border - baseRadius, 0, -padding>
+            }
+
+            box {
+                <-tWidth/2 - barThickness/2 + 2 * baseRadius, absHeight/2 - barHeight/2, -tHeight/2 + baseRadius>,
+                <-tWidth/2 + barThickness/2 + 2 * baseRadius, absHeight/2 + barHeight/2, tHeight/2 - baseRadius>
+            }
+
+            box {
+                <tWidth/2 - 2 * baseRadius - barThickness/2, absHeight/2 - barHeight/2, -tHeight/2 + baseRadius>,
+                <tWidth/2 - 2 * baseRadius + barThickness/2, absHeight/2 + barHeight/2, tHeight/2 - baseRadius>
+           }
+
+            box {
+                <-tWidth/2 + 2 * baseRadius, absHeight/2 - barHeight/2, -barThickness/2>,
+                <tWidth/2 - 2 * baseRadius, absHeight/2 + barHeight/2, barThickness/2>
+            }
+
+            texture { BlackMetal }
         }
     }
 #end
@@ -64,7 +112,8 @@
 
 #if (debugMode)
     camera {
-      location <0, 0, -1.5>
+      //location <0.5, 0, -2.5>
+      location <0, 0.5, -2.5>
       look_at <0, 0, 1>
     }
 
@@ -79,16 +128,16 @@
         }
     }
 
-    #local h = 2;
+    #local h = 0.8;
     union {
         object {
-            GhostTable(1.5, 0.7, 0.03, 0.8)
-            rotate y * 20
+            GhostTable(1.5, 0.7, 0.03, h, 0.06)
+            rotate y * -30
         }
 
         /*box {
-            <-1.2, 0, -0.2>,
-            <-0.8, h, 0.2>
+            <-0.6, 0, -0.2>,
+            <-0.2, h, 0.2>
         }*/
         translate <0, -1, 1>
     }
