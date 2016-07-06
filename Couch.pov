@@ -2,6 +2,7 @@
 
 #include "colors.inc"
 #include "shapes.inc"
+#include "Utils.pov"
 
 #local debugMode = 1;
 #if (debugMode)
@@ -30,73 +31,107 @@
         }
     }
 
-    #local support = union {
-        object {
-            halfTorus
+    #local support = difference {
+        union {
+            object {
+                halfTorus
+            }
+
+            cylinder {
+                <0, 0, supRadius>,
+                <cHeight/2, 0, supRadius>,
+                supThickness/2
+            }
+
+            cylinder {
+                <0, 0, -supRadius>,
+                <cHeight/2, 0, -supRadius>,
+                supThickness/2
+            }
+
+            cylinder {
+                <cHeight/2, 0, -supRadius>,
+                <cHeight/2, 0, supRadius>,
+                supThickness/2
+            }
         }
 
-        cylinder {
-            <0, 0, supRadius>,
-            <cHeight/2, 0, supRadius>,
-            supThickness/2
+        box {
+            <cHeight/2, -supThickness/2 - 0.01, -supRadius - 0.01>
+            <cHeight/2 + supThickness/2, supThickness/2 + 0.01, supRadius + 0.01>
         }
 
-        cylinder {
-            <0, 0, -supRadius>,
-            <cHeight/2, 0, -supRadius>,
-            supThickness/2
-        }
         rotate x * -90
         rotate z * -90
         rotate y * 90
         translate <0, cHeight/2, 0>
     }
 
-    difference {
-        union {
-            // Left Back
-            object {
-                Round_Box(
-                    <-totalWidth/2, seatHeight, (cLength - backThickness)/2>,
-                    <0, cHeight, cLength/2>,
-                    backRadius, 0
-                )
+    #local partialSupport = difference {
+        object {
+            support
+        }
+
+        box {
+            <-supThickness/2, seatHeight - seatThickness + 0.01, -cLength/2 - totalSupRadius>,
+            <supThickness/2, cHeight, cLength/2 + totalSupRadius>
+        }
+    }
+
+    union {
+        difference {
+            union {
+                // Left Back
+                object {
+                    Round_Box(
+                        <-totalWidth/2, seatHeight, (cLength - backThickness)/2>,
+                        <0, cHeight, cLength/2>,
+                        backRadius, 0
+                    )
+                }
+
+                // Right Back
+                object {
+                    Round_Box(
+                        <0, seatHeight, (cLength - backThickness)/2>,
+                        <totalWidth/2, cHeight, cLength/2>,
+                        backRadius, 0
+                    )
+                }
+
+                // Seat
+                box {
+                    <-totalWidth/2, 0, -cLength/2>,
+                    <totalWidth/2, seatHeight, cLength/2>
+                }
             }
 
-            // Right Back
-            object {
-                Round_Box(
-                    <0, seatHeight, (cLength - backThickness)/2>,
-                    <totalWidth/2, cHeight, cLength/2>,
-                    backRadius, 0
-                )
-            }
-
-            // Seat
             box {
-                <-totalWidth/2, 0, -cLength/2>,
-                <totalWidth/2, seatHeight, cLength/2>
+                <-totalWidth/2 - 0.01, 0, -cLength/2 - 0.01>,
+                <totalWidth/2 + 0.01, seatHeight - seatThickness, cLength/2 + 0.01>
             }
+            pigment { rgb<0, 0, 0.02> }
+        }
 
-            // Left Support
+        // Left Support
+        union {
             object {
                 support
                 translate <(-totalWidth - supThickness)/2, 0, 0>
+            }
+
+            // Middle Support
+            object {
+                partialSupport
             }
 
             // Right Support
             object {
                 support
                 translate <(totalWidth + supThickness)/2, 0, 0>
-            }        
+            }
+            texture { BlackMetal }
         }
-
-        box {
-            <-totalWidth/2 - 0.01, 0, -cLength/2 - 0.01>,
-            <totalWidth/2 + 0.01, seatHeight - seatThickness, cLength/2 + 0.01>
-        }
-
-        pigment { rgb<0, 0, 0.1> }
     }
 #end
 
@@ -106,7 +141,7 @@
 
 #if (debugMode)
     camera {
-      location <0, 1, -2.5>
+      location <0, 0, -2.5>
       look_at <0, 0, 1>
     }
 
