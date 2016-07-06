@@ -9,6 +9,7 @@ global_settings {
 
 #include "Chair.pov"
 #include "Couch.pov"
+#include "Vase.pov"
 #include "FatVase.pov"
 #include "FlyingFourthOfATable.pov"
 #include "GhostTable.pov"
@@ -492,6 +493,16 @@ object {
     FatVase(0.45, 0.23, 0.1)
     pigment { Green }
     translate <12.13, 0.05, 34.85>
+}
+
+object {
+    Vase(0.55, 0.18, 0.33, 0.02, 0.1)
+    translate <15.6, 0.05, 32.45>
+    texture {
+        pigment { VeryDarkBrown }
+        normal { bumps 0.4 scale 0.05 }
+        finish { phong 1 }
+    }
 }
 
 // Couch
