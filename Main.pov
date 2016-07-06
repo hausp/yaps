@@ -11,6 +11,7 @@ global_settings {
 #include "Couch.pov"
 #include "FatVase.pov"
 #include "FlyingFourthOfATable.pov"
+#include "GhostTable.pov"
 #include "Lamp.pov"
 #include "MobileOnWheels.pov"
 #include "Monitor.pov"
@@ -501,7 +502,7 @@ object {
 }
 
 // Ghost Table
-/*object {
-    GhostTable(1.5, 0.7, 0.03, 0.8, 0.06)
-    rotate y * -30
-}*/
+object {
+    GhostTable(1.3, 0.4, 0.03, 0.52, 0.06)
+    translate <14, 0, 35>
+}
