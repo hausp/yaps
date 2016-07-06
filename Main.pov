@@ -332,6 +332,20 @@ union {
 
     object {
         Chair
+        rotate y * 180
+        scale 1.06
+        translate <13.7, 0.048, 32.2>
+    }
+
+    object {
+        Chair
+        rotate y * 170
+        scale 1.06
+        translate <14.5, 0.048, 32.2>
+    }
+
+    object {
+        Chair
         rotate y * 90
         scale 1.06
         translate <16.25, 0.048, 34.1>
