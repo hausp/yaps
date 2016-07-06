@@ -20,6 +20,7 @@ global_settings {
 #include "SquareTable.pov"
 #include "TrashCan.pov"
 #include "Window.pov"
+#include "WoodTable.pov"
 
 
 #declare roomHeight = 3.10;
@@ -484,13 +485,13 @@ object {
         pigment { DarkBrown }
         finish { phong 1 }
     }
-    translate <13.12, 0, 37>
+    translate <13.12, 0.05, 37>
 }
 
 object {
     FatVase(0.45, 0.23, 0.1)
     pigment { Green }
-    translate <12.13, 0, 34.85>
+    translate <12.13, 0.05, 34.85>
 }
 
 // Couch
@@ -498,11 +499,18 @@ object {
     //Couch(0.5, 2, 1.1, 0.5, 0.17, 1, 0.3, 0.6)
     Couch(2.3, 2, 1.1, 0.5, 0.17, 1, 0.3, 0.6)
     scale 0.5
-    translate <14.2, 0, 37>
+    translate <14.2, 0.05, 37>
 }
 
 // Ghost Table
 object {
     GhostTable(1.3, 0.4, 0.03, 0.52, 0.06)
-    translate <14, 0, 35>
+    translate <14, 0.05, 35>
+}
+
+// Wood Table
+object {
+    WoodTable(1, 0.63, 0.10, 1.10)
+    rotate -25 * y
+    translate <8.75, 0.05, 26>
 }
