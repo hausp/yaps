@@ -98,6 +98,33 @@
             rotate z * -90
             translate <3 * lampRadius - 0.02, 0, 0>
         }
+
+        union {
+            cylinder {
+                <-totalWidth/2, 0, -length/2 - 0.001>,
+                <-totalWidth/2, 0, -length/2>,
+                lampRadius
+            }
+
+            cylinder {
+                <-totalWidth/2, 0, length/2 + 0.001>,
+                <-totalWidth/2, 0, length/2>,
+                lampRadius
+            }
+
+            cylinder {
+                <totalWidth/2, 0, -length/2 - 0.001>,
+                <totalWidth/2, 0, -length/2>,
+                lampRadius
+            }
+
+            cylinder {
+                <totalWidth/2, 0, length/2 + 0.001>,
+                <totalWidth/2, 0, length/2>,
+                lampRadius
+            }
+            texture { pigment { Gray } }
+        }
     }
 
     #if (status)
