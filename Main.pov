@@ -25,7 +25,7 @@ global_settings {
 
 
 #declare roomHeight = 3.10;
-#declare roomWidth = 70;
+#declare roomWidth = 140;
 #declare roomDepth = 75;
 
 #declare Camera_Location = <8.66, 1.4, roomDepth/2 - 18.5>;
@@ -40,7 +40,7 @@ global_settings {
 #local numWindows = (roomWidth + 2 * winBorderRadius) / winWidth;
 #local lampRadius = 0.03;
 #local lampLength = 1;
-#local lampIntensity = 0.15;
+#local lampIntensity = 0.10;
 #local tableHeight = 0.8;
 
 /*
@@ -67,14 +67,24 @@ background { rgb<135/255, 206/255, 250/255>
     //Blue
 }
 
-light_source {
-    <15, roomHeight + 50, roomDepth/2 + 50>
-    color White * 0.20
-    looks_like {
-        sphere {
-            <0,0,0>, 20
+plane {
+    y, -10
+    texture {
+        pigment {
+            Green
         }
     }
+}
+
+sky_sphere {
+    pigment { Blue }
+}
+
+light_source {
+    <20, roomHeight - 1, roomDepth/2 + 5>
+    color White
+    parallel
+    point_at <0, 0, 0>
 }
 
 // Room
@@ -82,7 +92,7 @@ difference {
     // outer box
     box {
         <-(roomWidth/2 + 0.10), -0.10, -(roomDepth/2 - 0.10)>,
-        <(roomWidth/2 + 0.10), roomHeight + 0.10, (roomDepth/2 + 0.05)>
+        <(roomWidth/2 + 0.10), roomHeight + 1, (roomDepth/2 + 0.05)>
     }
     // inner box
     box {
@@ -117,7 +127,7 @@ union {
             <roomWidth/2, roomHeight - 0.0001, roomDepth/2 - I * csHeight + 0.02>
         }
     #end
-    texture { Aluminum }
+    texture { Chrome_Metal }
 }
 
 // Floor

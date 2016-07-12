@@ -11,6 +11,21 @@
     }
 #end
 
+#declare WindowGlass =
+texture{
+    pigment {
+        rgbf<0.90,0.90,0.90,0.8>
+    }
+    finish {
+        diffuse 0.1
+        reflection 0.02
+        specular 0.8
+        roughness 0.0003
+        phong 1
+        phong_size 400
+    }
+}
+
 // ----------------------------------------
 // Window
 // ----------------------------------------
@@ -19,12 +34,19 @@
     #local offsetX = numWindows * winWidth / 2;
     union {
         #for (I, 0, numWindows - 1)
-            Frame(
-                <I * winWidth - offsetX, 0, 0>,
-                <(I + 1) * winWidth - offsetX, winHeight, thick>,
-                thick,
-                z
-            )
+            union {
+                Frame(
+                    <I * winWidth - offsetX, 0, 0>,
+                    <(I + 1) * winWidth - offsetX, winHeight, thick>,
+                    thick,
+                    z
+                )
+                box {
+                    <I * winWidth, 0, thick/3>,
+                    <(I + 1) * winWidth, winHeight, 2*thick/3>
+                    texture { WindowGlass }
+                }
+            }
         #end
     }
 #end

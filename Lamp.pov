@@ -130,6 +130,11 @@
     #if (status)
         light_source {
             <0, 0, 0> color White * intensity
+            /*area_light
+                <0, 0, -length/2> <0, 0, length/2>
+                1, 10
+                adaptive 1
+                jitter */
             looks_like { LampBody }
         }
     #else
